@@ -19,11 +19,12 @@ export default function ResumePage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleDownload = (type: string) => {
+  const handleDownload = (type) => {
     const url = type === "resume" ? "/Resume.pdf" : "/CV.pdf";
     window.open(url, "_blank");
     setView(type);
   };
+
 
   const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
 
