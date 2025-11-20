@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from "react";
-import { Download, FileText, ArrowRight, Mail } from "lucide-react";
+import { Download, FileText, ArrowRight, Mail, Github, Linkedin, Instagram, Facebook } from "lucide-react";
 import { motion } from "framer-motion";
 import Typical from "react-typical";
-import { personalInfo, professionalSummary, education, experience, projects, skills, awards } from "./data/resumeData";
+import { personalInfo, professionalSummary, education, experience, projects, skills, awards, socialLinks } from "./data/resumeData";
 
 export default function ResumePage() {
   const [theme, setTheme] = useState("light");
@@ -106,6 +106,30 @@ export default function ResumePage() {
               <span className="px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-sm text-gray-200">
                 {personalInfo.phone}
               </span>
+            </div>
+
+            {/* Social Links */}
+            <div className="mt-4 flex justify-center gap-4">
+              {socialLinks.github && (
+                <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-white/20 hover:text-blue-400 transition-colors">
+                  <Github className="w-5 h-5 text-gray-200" />
+                </a>
+              )}
+              {socialLinks.linkedin && (
+                <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-white/20 hover:text-blue-400 transition-colors">
+                  <Linkedin className="w-5 h-5 text-gray-200" />
+                </a>
+              )}
+              {socialLinks.instagram && (
+                <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-white/20 hover:text-pink-400 transition-colors">
+                  <Instagram className="w-5 h-5 text-gray-200" />
+                </a>
+              )}
+              {socialLinks.facebook && (
+                <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-white/20 hover:text-blue-600 transition-colors">
+                  <Facebook className="w-5 h-5 text-gray-200" />
+                </a>
+              )}
             </div>
 
             {/* Download Buttons */}

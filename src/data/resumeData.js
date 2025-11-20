@@ -45,3 +45,10 @@ export const awards = [
   { title: "Outstanding Activity Award", year: "2023" },
   { title: "Outstanding Activity Award", year: "2024" }
 ];
+
+export const socialLinks = {
+  github: "https://github.com/6ixthxense",
+  linkedin: "https://www.linkedin.com/in/woravut-dairoop-13972b1b9/",
+  instagram: "https://www.instagram.com/somxonx_ckyy/",
+  facebook: "https://www.facebook.com/Woravut M. Dairoop"
+};
