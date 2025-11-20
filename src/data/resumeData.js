@@ -1,4 +1,3 @@
-// src/data/resumeData.js
 export const personalInfo = {
   name: "Woravut Dairoop",
   roles: ["Data Analyst", 1500, "IT Support", 1500, "Web Developer", 1500],
@@ -8,8 +7,7 @@ export const personalInfo = {
   profileImage: "/pro1_1_2.png"
 };
 
-export const professionalSummary = 
-  "Highly motivated and detail-oriented Data Analyst with a strong academic foundation in Data Science. Currently working as Data Analyst, IT Support, and Web Developer at Bigmall Plus. Skilled in Python, R, Power BI, and Excel with experience in data analytics, dashboard creation, and system support. Proven leadership as President of the Faculty of Science Student Union.";
+export const professionalSummary = "\tHighly motivated and detail-oriented Data Analyst with a strong academic foundation in Data Science and proven experience in full-stack web application development using the MERN/MEVN Stack (specifically React and Node.js) for critical business systems.\n\tCurrently serving a multifaceted role at Bigmall Plus, encompassing IT Support and Data Analysis.\n\tKey contributions include the successful development, deployment, and maintenance of a proprietary Warehouse Management System (WMS) Web Application built with React (Frontend) and Node.js (Backend) that is currently in production use.\n\tSkilled in Python, R, Power BI, Excel, and SQL with extensive experience in data analytics, dashboard creation, and system support.\n\tDemonstrated leadership as President of the Faculty of Science Student Union.";
 
 export const education = {
   degree: "Bachelor of Science in Data Science",
@@ -39,7 +37,6 @@ export const skills = [
   { name: "JavaScript", level: 80 },
   { name: "HTML", level: 80 },
   { name: "CSS", level: 80 },
-  { name: "React", level: 80 },
   { name: "Google Sheets", level: 75 },
   { name: "SQL", level: 65 }
 ];

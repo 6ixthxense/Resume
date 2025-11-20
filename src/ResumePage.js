@@ -137,7 +137,7 @@ export default function ResumePage() {
             className="mb-8 p-6 sm:p-8 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-xl hover:shadow-2xl transition-all"
           >
             <h2 className="text-3xl font-serif font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-4">💼 Professional Summary</h2>
-            <p className="text-gray-200 dark:text-gray-100 leading-relaxed">
+            <p className="text-gray-200 dark:text-gray-100 leading-relaxed whitespace-pre-wrap">
               {professionalSummary}
             </p>
           </motion.section>
