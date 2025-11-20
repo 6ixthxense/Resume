@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from "react";
-import { Download, FileText, ArrowRight, Mail, Github, Linkedin, Instagram, Facebook } from "lucide-react";
+import { Download, FileText, Mail, Github, Linkedin, Instagram, Facebook } from "lucide-react";
+import { FaPython, FaJs, FaHtml5, FaCss3, FaDatabase, FaChartBar, FaChartLine, FaFileExcel } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Typical from "react-typical";
 import { personalInfo, professionalSummary, education, experience, projects, skills, awards, socialLinks } from "./data/resumeData";
@@ -259,22 +260,37 @@ export default function ResumePage() {
           >
             <h2 className="text-3xl font-serif font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-6">🛠 Core Competencies</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {skills.map((skill, i) => (
-                <motion.div 
-                  key={i} 
-                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }} 
-                  className="p-4 bg-white/5 border border-white/10 rounded-xl flex flex-col items-center justify-center gap-3 group transition-all cursor-pointer"
-                >
-                  <div className="relative w-16 h-16 flex items-center justify-center">
-                    <svg className="w-full h-full transform -rotate-90">
-                      <circle cx="32" cy="32" r="28" stroke="currentColor" strokeWidth="4" fill="transparent" className="text-gray-700" />
-                      <circle cx="32" cy="32" r="28" stroke="currentColor" strokeWidth="4" fill="transparent" strokeDasharray={175.93} strokeDashoffset={175.93 - (175.93 * skill.level) / 100} className="text-blue-400" />
-                    </svg>
-                    <span className="absolute text-sm font-bold text-white">{skill.level}%</span>
-                  </div>
-                  <p className="font-medium text-gray-200 group-hover:text-blue-300 transition-colors text-center">{skill.name}</p>
-                </motion.div>
-              ))}
+              {skills.map((skill, i) => {
+                const skillIcons = {
+                  "Python": <FaPython className="w-8 h-8 text-blue-400" />,
+                  "Power BI": <FaChartBar className="w-8 h-8 text-yellow-400" />,
+                  "R": <FaChartLine className="w-8 h-8 text-blue-500" />,
+                  "JavaScript": <FaJs className="w-8 h-8 text-yellow-300" />,
+                  "HTML": <FaHtml5 className="w-8 h-8 text-orange-500" />,
+                  "CSS": <FaCss3 className="w-8 h-8 text-blue-500" />,
+                  "Google Sheets": <FaFileExcel className="w-8 h-8 text-green-500" />,
+                  "SQL": <FaDatabase className="w-8 h-8 text-gray-400" />
+                };
+
+                return (
+                  <motion.div 
+                    key={i} 
+                    whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }} 
+                    className="p-4 bg-white/5 border border-white/10 rounded-xl flex flex-col items-center justify-center gap-3 group transition-all cursor-pointer"
+                  >
+                    <div className="relative w-16 h-16 flex items-center justify-center">
+                      <svg className="w-full h-full transform -rotate-90">
+                        <circle cx="32" cy="32" r="28" stroke="currentColor" strokeWidth="4" fill="transparent" className="text-gray-700" />
+                        <circle cx="32" cy="32" r="28" stroke="currentColor" strokeWidth="4" fill="transparent" strokeDasharray={175.93} strokeDashoffset={175.93 - (175.93 * skill.level) / 100} className="text-blue-400" />
+                      </svg>
+                      <span className="absolute flex items-center justify-center">
+                        {skillIcons[skill.name] || <span className="text-sm font-bold text-white">{skill.level}%</span>}
+                      </span>
+                    </div>
+                    <p className="font-medium text-gray-200 group-hover:text-blue-300 transition-colors text-center">{skill.name}</p>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.section>
 
