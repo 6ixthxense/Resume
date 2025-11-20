@@ -50,5 +50,5 @@ export const socialLinks = {
   github: "https://github.com/6ixthxense",
   linkedin: "https://www.linkedin.com/in/woravut-dairoop-13972b1b9/",
   instagram: "https://www.instagram.com/somxonx_ckyy/",
-  facebook: "https://www.facebook.com/Woravut M. Dairoop"
+  facebook: "https://www.facebook.com/MickeyWRV/"
 };
