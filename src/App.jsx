@@ -19,15 +19,15 @@ export default function App() {
   // กำหนด sequence ของ terminal splash
   const lines = [
     '> git pull origin main',
-    { type: 'progress', label: 'Fetching origin…', duration: 2000, length: 40 },
+    { type: 'progress', label: 'Fetching origin…', duration: 800, length: 40 },
 
     '',
     '> npm install',
-    { type: 'modules', modules: moduleNames, speed: 100 },
+    { type: 'modules', modules: moduleNames, speed: 15 },
 
     '',
     '> npm run build',
-    { type: 'progress', label: 'Compiling modules', duration: 2000, length: 40 },
+    { type: 'progress', label: 'Compiling modules', duration: 1000, length: 40 },
 
     '',
     '✨  Build complete!',
@@ -37,7 +37,8 @@ export default function App() {
     { type: 'ascii-block', art: welcomeAscii },
     '',
 
-    '🚀  Launching app…',
+    '🚀  SYSTEM READY. ACCESS GRANTED.',
+    'Launching app…',
   ];
 
   return (

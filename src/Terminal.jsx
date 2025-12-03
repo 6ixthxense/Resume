@@ -35,7 +35,7 @@ export default function Terminal({ lines, onFinish }) {
       const { label, duration = 2000, length = 40 } = entry;
       let pct = 0;
       const stepTime = duration / 100; // 100 ขั้น
-      setCurrentLine(''); 
+      setCurrentLine('');
       const iv = setInterval(() => {
         pct++;
         const filled = Math.round((pct / 100) * length);
@@ -60,7 +60,7 @@ export default function Terminal({ lines, onFinish }) {
         const t = setTimeout(() => {
           setCurrentLine(prev => prev + entry[charIndex]);
           setCharIndex(ci => ci + 1);
-        }, 50);
+        }, 20);
         return () => clearTimeout(t);
       } else {
         const t = setTimeout(() => {
@@ -68,7 +68,7 @@ export default function Terminal({ lines, onFinish }) {
           setCurrentLine('');
           setLineIndex(li => li + 1);
           setCharIndex(0);
-        }, 300);
+        }, 50);
         return () => clearTimeout(t);
       }
     }
