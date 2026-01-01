@@ -1,6 +1,6 @@
 export const personalInfo = {
   name: "Woravut Dairoop",
-  roles: ["Data Analyst", 1500, "IT Support", 1500, "Web Developer", 1500],
+  roles: ["Data Analyst", 1500, "IT Support", 1500, "Fullstack Developer", 1500],
   company: "Bigmall Plus",
   email: "woravutdairoop.work@gmail.com",
   phone: "+66 62 610 0297",
@@ -9,18 +9,25 @@ export const personalInfo = {
 
 export const professionalSummary = "\tHighly motivated and detail-oriented Data Analyst with a strong academic foundation in Data Science and proven experience in full-stack web application development using the MERN/MEVN Stack (specifically React and Node.js) for critical business systems.\n\tCurrently serving a multifaceted role at Bigmall Plus, encompassing IT Support and Data Analysis.\n\tKey contributions include the successful development, deployment, and maintenance of a proprietary Warehouse Management System (WMS) Web Application built with React (Frontend) and Node.js (Backend) that is currently in production use.\n\tSkilled in Python, R, Power BI, Excel, and SQL with extensive experience in data analytics, dashboard creation, and system support.\n\tDemonstrated leadership as President of the Faculty of Science Student Union.";
 
-export const education = {
-  degree: "Bachelor of Science in Data Science",
-  institution: "Silpakorn University",
-  period: "2020 - 2025"
-};
+export const education = [
+  {
+    degree: "Bachelor of Science in Data Science",
+    institution: "Silpakorn University",
+    period: "2020 - 2025"
+  },
+  {
+    degree: "Fullstack Developer & IT support & Data Analyst",
+    institution: "Bigmall Plus",
+    period: "6/2025 - Present"
+  }
+];
 
 export const experience = [
   "Head of Recreation (2021)",
   "Head of Recreation (2022)",
   "President (2023)",
   "Student Union Advisor (2024)",
-  "Fullstack Developer & IT support (2025)"
+  "Fullstack Developer & IT support & Data Analyst (2025)"
 ];
 
 export const projects = [
