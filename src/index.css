@@ -16,6 +16,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #020617;
   color: #f8fafc;
+  overflow-x: hidden;
+  /* Stimulate GPU for smoother scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Force hardware acceleration for common animated elements */
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform, opacity;
 }
 
 h1,
@@ -73,5 +82,22 @@ code,
 }
 
 .glass-card {
-  @apply backdrop-blur-3xl bg-white/[0.02] border border-white/10 shadow-2xl;
+  @apply bg-white/[0.02] border border-white/10 shadow-2xl;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.backdrop-blur-xl {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.backdrop-blur-lg {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }

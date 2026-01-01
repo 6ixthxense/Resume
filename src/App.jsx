@@ -50,7 +50,7 @@ export default function App() {
             key="app-main"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="fixed inset-0 overflow-hidden"
+            className="fixed inset-0 overflow-hidden transform-gpu"
           >
             {/* Background Layer */}
             <HexRain fontSize={12} speed={40} />

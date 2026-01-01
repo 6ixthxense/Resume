@@ -61,7 +61,7 @@ export default function ResumePage() {
 
       <div className="min-h-screen bg-slate-950 text-slate-200 p-4 sm:p-6 lg:p-12 transition-colors relative overflow-hidden">
 
-        <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+        <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10 translate-z-0">
           <motion.div
             animate={{
               x: [0, 100, 0],
@@ -69,7 +69,7 @@ export default function ResumePage() {
               scale: [1, 1.2, 1]
             }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]"
+            className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] transform-gpu"
           />
           <motion.div
             animate={{
@@ -78,7 +78,7 @@ export default function ResumePage() {
               scale: [1, 1.1, 1]
             }}
             transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-            className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px]"
+            className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[100px] transform-gpu"
           />
         </div>
 
@@ -88,7 +88,7 @@ export default function ResumePage() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
-            className="text-center relative py-12 px-6 backdrop-blur-3xl bg-white/[0.02] border border-white/10 rounded-[40px] shadow-2xl"
+            className="text-center relative py-12 px-6 backdrop-blur-xl bg-white/[0.02] border border-white/10 rounded-[40px] shadow-2xl transform-gpu"
           >
             <div className="relative inline-block mb-8 group">
               <motion.div
@@ -165,9 +165,9 @@ export default function ResumePage() {
               id="summary"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-100px" }}
               variants={containerVariants}
-              className="p-8 bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-[32px] hover:border-blue-500/30 transition-colors group"
+              className="p-8 bg-white/[0.03] backdrop-blur-lg border border-white/10 rounded-[32px] hover:border-blue-500/30 transition-colors group transform-gpu"
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="p-3 bg-blue-500/20 rounded-2xl group-hover:scale-110 transition-transform">
@@ -184,9 +184,9 @@ export default function ResumePage() {
               id="education"
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-100px" }}
               variants={containerVariants}
-              className="p-8 bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-[32px] hover:border-purple-500/30 transition-colors group"
+              className="p-8 bg-white/[0.03] backdrop-blur-lg border border-white/10 rounded-[32px] hover:border-purple-500/30 transition-colors group transform-gpu"
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="p-3 bg-purple-500/20 rounded-2xl group-hover:scale-110 transition-transform">
@@ -212,9 +212,9 @@ export default function ResumePage() {
             id="skills"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             variants={containerVariants}
-            className="p-8 lg:p-12 bg-white/[0.02] border border-white/10 rounded-[40px] shadow-2xl relative overflow-hidden"
+            className="p-8 lg:p-12 bg-white/[0.02] border border-white/10 rounded-[40px] shadow-2xl relative overflow-hidden transform-gpu"
           >
             <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
               Technical Analytics & Proficiency
