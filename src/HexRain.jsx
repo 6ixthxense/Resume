@@ -9,11 +9,11 @@ export default function HexRain({
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx    = canvas.getContext('2d');
-    const w      = (canvas.width  = window.innerWidth);
-    const h      = (canvas.height = window.innerHeight);
-    const cols   = columns || Math.floor(w / fontSize);
-    const drops  = Array(cols).fill(0);
+    const ctx = canvas.getContext('2d');
+    const w = (canvas.width = window.innerWidth);
+    const h = (canvas.height = window.innerHeight);
+    const cols = columns || Math.floor(w / fontSize);
+    const drops = Array(cols).fill(0);
     const hexChars = '0123456789';
 
     function draw() {
@@ -22,11 +22,11 @@ export default function HexRain({
       ctx.fillRect(0, 0, w, h);
 
       ctx.fillStyle = '#0F0';
-      ctx.font      = `${fontSize}px monospace`;
+      ctx.font = `${fontSize}px monospace`;
 
       for (let x = 0; x < cols; x++) {
         const char = hexChars[Math.floor(Math.random() * hexChars.length)];
-        const y     = drops[x] * fontSize;
+        const y = drops[x] * fontSize;
         ctx.fillText(char, x * fontSize, y);
 
         // ถ้าละเมอเกินจอ ให้รีเซ็ต
@@ -38,8 +38,21 @@ export default function HexRain({
       }
     }
 
-    const tid = setInterval(draw, speed);
-    return () => clearInterval(tid);
+    let frameId;
+    let lastTime = 0;
+
+    function animate(time) {
+      const deltaTime = time - lastTime;
+
+      if (deltaTime > speed) {
+        lastTime = time;
+        draw();
+      }
+      frameId = requestAnimationFrame(animate);
+    }
+
+    frameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frameId);
   }, [fontSize, speed, columns]);
 
   return (
