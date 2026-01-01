@@ -68,7 +68,7 @@ export default function ChatBot() {
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                        className="mb-4 w-[calc(100vw-32px)] sm:w-[380px] h-[550px] bg-slate-900/98 backdrop-blur-2xl border border-white/10 rounded-[2rem] shadow-2xl flex flex-col overflow-hidden"
+                        className="mb-4 w-[calc(100vw-32px)] sm:w-[380px] h-[550px] bg-slate-900/98 backdrop-blur-lg border border-white/10 rounded-[2rem] shadow-2xl flex flex-col overflow-hidden transform-gpu"
                     >
                         {/* Header */}
                         <div className="p-5 bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-between shadow-lg">
@@ -100,8 +100,8 @@ export default function ChatBot() {
                                     className={`flex ${msg.role === 'bot' ? 'justify-start' : 'justify-end'}`}
                                 >
                                     <div className={`max-w-[85%] p-4 rounded-2xl text-[13px] leading-relaxed shadow-sm ${msg.role === 'bot'
-                                            ? 'bg-white/10 text-slate-200 rounded-tl-none border border-white/5'
-                                            : 'bg-blue-600 text-white rounded-tr-none shadow-blue-900/20'
+                                        ? 'bg-white/10 text-slate-200 rounded-tl-none border border-white/5'
+                                        : 'bg-blue-600 text-white rounded-tr-none shadow-blue-900/20'
                                         }`}>
                                         {msg.text}
                                     </div>
@@ -160,8 +160,8 @@ export default function ChatBot() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(!isOpen)}
                 className={`w-16 h-16 rounded-full shadow-2xl flex items-center justify-center text-white border transition-all duration-300 ${isOpen
-                        ? 'bg-slate-800 border-white/20'
-                        : 'bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 border-white/30'
+                    ? 'bg-slate-800 border-white/20'
+                    : 'bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 border-white/30'
                     }`}
             >
                 {isOpen ? <X className="w-7 h-7" /> : <MessageSquare className="w-7 h-7" />}
