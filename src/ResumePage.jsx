@@ -220,8 +220,8 @@ export default function ResumePage() {
               Technical Analytics & Proficiency
             </h2>
 
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="h-[400px] w-full flex items-center justify-center">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div className="h-[300px] sm:h-[400px] w-full flex items-center justify-center">
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarData}>
                     <PolarGrid stroke="#334155" />
@@ -242,7 +242,7 @@ export default function ResumePage() {
                 </ResponsiveContainer>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {skills.map((skill, i) => {
                   const icons = {
                     "Python": <FaPython className="text-blue-400" />,
@@ -258,14 +258,14 @@ export default function ResumePage() {
                     <motion.div
                       key={i}
                       whileHover={{ scale: 1.02 }}
-                      className="p-4 bg-white/5 border border-white/5 rounded-2xl flex items-center gap-4 group"
+                      className="p-4 bg-white/5 border border-white/5 rounded-2xl flex items-center gap-4 group transition-colors hover:bg-white/10"
                     >
-                      <div className="text-3xl opacity-60 group-hover:opacity-100 transition-opacity">
+                      <div className="text-3xl opacity-60 group-hover:opacity-100 transition-opacity shrink-0">
                         {icons[skill.name]}
                       </div>
-                      <div>
-                        <div className="text-sm font-bold text-slate-300">{skill.name}</div>
-                        <div className="w-24 h-1.5 bg-slate-800 rounded-full mt-2 overflow-hidden">
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-bold text-slate-300 truncate">{skill.name}</div>
+                        <div className="w-full h-1.5 bg-slate-800 rounded-full mt-2 overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
                             whileInView={{ width: `${skill.level}%` }}
