@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@400;700&family=Sarabun:wght@300;400;700&display=swap');
 
 :root {
   --blue-glow: 0 0 20px rgba(59, 130, 246, 0.5);
@@ -19,6 +19,17 @@ body {
   overflow-x: hidden;
   /* Stimulate GPU for smoother scrolling on iOS */
   -webkit-overflow-scrolling: touch;
+}
+
+body.lang-th {
+  font-family: 'Sarabun', 'Inter', sans-serif;
+}
+
+body.lang-th h1,
+body.lang-th h2,
+body.lang-th h3 {
+  font-family: 'Sarabun', 'Inter', sans-serif;
+  letter-spacing: 0;
 }
 
 /* Force hardware acceleration for common animated elements */

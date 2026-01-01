@@ -35,6 +35,10 @@ export default function ResumePage({ lang, setLang }) {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  useEffect(() => {
+    document.body.classList.toggle("lang-th", lang === "th");
+  }, [lang]);
+
   const handleDownload = type => {
     const url = type === "resume" ? "/Resume.pdf" : "/CV.pdf";
     window.open(url, "_blank");
