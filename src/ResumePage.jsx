@@ -95,7 +95,7 @@ export default function ResumePage({ lang, setLang }) {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
-            className="text-center relative py-12 px-6 backdrop-blur-xl bg-white/[0.02] border border-white/10 rounded-[40px] shadow-2xl transform-gpu"
+            className="relative py-12 px-6 backdrop-blur-xl bg-white/[0.02] border border-white/10 rounded-[40px] shadow-2xl transform-gpu flex flex-col items-center text-center"
           >
             {/* Language Toggle */}
             <div className="absolute top-6 right-6 flex gap-2">
@@ -112,7 +112,7 @@ export default function ResumePage({ lang, setLang }) {
                 TH
               </button>
             </div>
-            <div className="relative inline-block mb-8 group">
+            <div className="relative mb-8 group">
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
