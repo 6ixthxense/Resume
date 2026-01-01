@@ -13,11 +13,12 @@ export default function HexRain({
     const w = (canvas.width = window.innerWidth);
     const h = (canvas.height = window.innerHeight);
     const isMobile = w < 768;
-    const adjustedFontSize = isMobile ? fontSize * 1.5 : fontSize;
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const adjustedFontSize = isMobile ? fontSize * 2 : fontSize;
     const cols = columns || Math.floor(w / adjustedFontSize);
     const drops = Array(cols).fill(0);
     const hexChars = '0123456789';
-    const adjustedSpeed = isMobile ? speed * 1.5 : speed;
+    const adjustedSpeed = isIOS ? speed * 3 : (isMobile ? speed * 2 : speed);
 
     function draw() {
       // สร้างเงาดำโปร่งให้ดูลากเบลอ
