@@ -1,21 +1,44 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send } from 'lucide-react';
-import { personalInfo, skills, education } from './data/resumeData';
+import { resumeData, skills } from './data/resumeData';
 
-const initialQuestions = [
-    "What are your top skills?",
-    "Tell me about your experience.",
-    "Which projects have you worked on?",
-    "How can I contact you?",
-    "What is your current role?",
-    "Where did you study?"
-];
+const translations = {
+    en: {
+        welcome: "Hi! I'm Woravut's AI assistant. How can I help you today?",
+        placeholder: "Ask me about Woravut...",
+        online: "Online & Ready",
+        questions: [
+            "What are your top skills?",
+            "Tell me about your experience.",
+            "Which projects have you worked on?",
+            "How can I contact you?",
+            "What is your current role?",
+            "Where did you study?"
+        ]
+    },
+    th: {
+        welcome: "สวัสดีครับ! ผมคือผู้ช่วย AI ของวรวุฒิ มีอะไรให้ช่วยไหมครับ?",
+        placeholder: "ถามเรื่องต่างๆ ของวรวุฒิ...",
+        online: "ออนไลน์ & พร้อมช่วยเหลือ",
+        questions: [
+            "ทักษะเด่นของคุณคืออะไร?",
+            "เล่าประสบการณ์ถนัดให้ฟังหน่อย",
+            "คุณทำโปรเจกต์อะไรบ้าง?",
+            "ติดต่อคุณได้ทางไหน?",
+            "ปัจจุบันคุณทำตำแหน่งอะไร?",
+            "คุณเรียนจบที่ไหน?"
+        ]
+    }
+};
 
-export default function ChatBot() {
+export default function ChatBot({ lang = 'en' }) {
     const [isOpen, setIsOpen] = useState(false);
+    const t = translations[lang] || translations.en;
+    const data = resumeData[lang] || resumeData.en;
+
     const [messages, setMessages] = useState([
-        { role: 'bot', text: `Hi! I'm Woravut's AI assistant. How can I help you today?` }
+        { role: 'bot', text: t.welcome }
     ]);
     const [isTyping, setIsTyping] = useState(false);
     const chatEndRef = useRef(null);
@@ -26,26 +49,51 @@ export default function ChatBot() {
 
     useEffect(scrollToBottom, [messages]);
 
+    // Reset welcome message when language changes
+    useEffect(() => {
+        setMessages([{ role: 'bot', text: t.welcome }]);
+    }, [lang]);
+
     const handleBotResponse = (userText) => {
         setIsTyping(true);
         let response = "";
         const text = userText.toLowerCase();
 
-        if (text.includes("skill")) {
-            response = `Woravut is an expert in Data Science and Development. His strongest skills are Python (${skills.find(s => s.name === "Python")?.level}%), Power BI, and JavaScript.`;
-        } else if (text.includes("experience") || text.includes("work")) {
-            response = `He has extensive experience in leadership (Student Union President) and technical roles. Currently, he is a Fullstack Developer & IT Support & Data Analyst at Bigmall Plus.`;
-        } else if (text.includes("project")) {
-            response = `Notable projects: Lung cancer prediction model, Football outcome predictor (DL), and a custom WMS for Bigmall Plus using React and Node.js.`;
-        } else if (text.includes("contact") || text.includes("phone") || text.includes("email")) {
-            response = `You can email him at ${personalInfo.email} or call ${personalInfo.phone}.`;
-        } else if (text.includes("role") || text.includes("current")) {
-            response = `He's currently a Fullstack Developer & IT Support & Data Analyst at Bigmall Plus (since June 2025).`;
-        } else if (text.includes("study") || text.includes("education")) {
-            const edu = education[0];
-            response = `He graduated with a ${edu.degree} from ${edu.institution} (${edu.period}).`;
+        if (lang === 'th') {
+            if (text.includes("ทักษะ") || text.includes("เก่ง")) {
+                response = `วรวุฒิเชี่ยวชาญด้าน Data Science และการพัฒนาซอฟต์แวร์ ทักษะเด่นคือ Python (${skills.find(s => s.name === "Python")?.level}%), Power BI และ JavaScript ครับ`;
+            } else if (text.includes("ประสบการณ์") || text.includes("ทำงาน")) {
+                response = `เขามีประสบการณ์ด้านความเป็นผู้นำ (ประธานสโมสรนักศึกษา) และงานด้านเทคนิค ปัจจุบันวรวุฒิทำงานที่ Bigmall Plus ในตำแหน่ง Fullstack Developer & IT Support & Data Analyst ครับ`;
+            } else if (text.includes("โปรเจกต์") || text.includes("ผลงาน")) {
+                response = `โปรเจกต์ที่น่าสนใจ ได้แก่ โมเดลทำนายโรคมะเร็งปอด, การทำนายผลฟุตบอล (DL) และระบบ WMS ให้กับบริษัท Bigmall Plus ครับ`;
+            } else if (text.includes("ติดต่อ") || text.includes("เบอร์") || text.includes("อีเมล")) {
+                response = `คุณสามารถส่งอีเมลหาเขาได้ที่ ${data.personalInfo.email} หรือโทร ${data.personalInfo.phone} ครับ`;
+            } else if (text.includes("ตำแหน่ง") || text.includes("ปัจจุบัน")) {
+                response = `ปัจจุบันดำรงตำแหน่ง Fullstack Developer & IT Support & Data Analyst ที่บริษัท Bigmall Plus ตั้งแต่เดือนมิถุนายน 2568 ครับ`;
+            } else if (text.includes("เรียน") || text.includes("การศึกษา")) {
+                const edu = data.education[0];
+                response = `เขาจบการศึกษา ${edu.degree} จาก ${edu.institution} (${edu.period}) ครับ`;
+            } else {
+                response = `เป็นคำถามที่น่าสนใจครับ! วรวุฒิชอบการเรียนรู้สิ่งใหม่อยู่เสมอ อยากทราบเกี่ยวกับทักษะเทคนิคหรือโปรเจกต์ล่าสุดของเขาไหมครับ?`;
+            }
         } else {
-            response = `That's interesting! Woravut is always learning. Would you like to know about his technical skills or latest projects?`;
+            // English Logic
+            if (text.includes("skill")) {
+                response = `Woravut is an expert in Data Science and Development. His strongest skills are Python (${skills.find(s => s.name === "Python")?.level}%), Power BI, and JavaScript.`;
+            } else if (text.includes("experience") || text.includes("work")) {
+                response = `He has extensive experience in leadership (Student Union President) and technical roles. Currently, he is a Fullstack Developer & IT Support & Data Analyst at Bigmall Plus.`;
+            } else if (text.includes("project")) {
+                response = `Notable projects: Lung cancer prediction model, Football outcome predictor (DL), and a custom WMS for Bigmall Plus using React and Node.js.`;
+            } else if (text.includes("contact") || text.includes("phone") || text.includes("email")) {
+                response = `You can email him at ${data.personalInfo.email} or call ${data.personalInfo.phone}.`;
+            } else if (text.includes("role") || text.includes("current")) {
+                response = `He's currently a Fullstack Developer & IT Support & Data Analyst at Bigmall Plus (since June 2025).`;
+            } else if (text.includes("study") || text.includes("education")) {
+                const edu = data.education[0];
+                response = `He graduated with a ${edu.degree} from ${edu.institution} (${edu.period}).`;
+            } else {
+                response = `That's interesting! Woravut is always learning. Would you like to know about his technical skills or latest projects?`;
+            }
         }
 
         setTimeout(() => {
@@ -78,7 +126,7 @@ export default function ChatBot() {
                                     <h3 className="text-white text-sm font-bold tracking-tight">Woravut AI Assistant</h3>
                                     <div className="flex items-center gap-1.5">
                                         <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                                        <span className="text-[10px] text-blue-100 font-medium">Online & Ready</span>
+                                        <span className="text-[10px] text-blue-100 font-medium">{t.online}</span>
                                     </div>
                                 </div>
                             </div>
@@ -100,8 +148,8 @@ export default function ChatBot() {
                                     className={`flex ${msg.role === 'bot' ? 'justify-start' : 'justify-end'}`}
                                 >
                                     <div className={`max-w-[85%] p-4 rounded-2xl text-[13px] leading-relaxed shadow-sm ${msg.role === 'bot'
-                                        ? 'bg-white/10 text-slate-200 rounded-tl-none border border-white/5'
-                                        : 'bg-blue-600 text-white rounded-tr-none shadow-blue-900/20'
+                                            ? 'bg-white/10 text-slate-200 rounded-tl-none border border-white/5'
+                                            : 'bg-blue-600 text-white rounded-tr-none shadow-blue-900/20'
                                         }`}>
                                         {msg.text}
                                     </div>
@@ -119,9 +167,9 @@ export default function ChatBot() {
                             <div ref={chatEndRef} />
                         </div>
 
-                        {/* Quick Questions Grid - 2 per row as requested */}
+                        {/* Quick Questions Grid */}
                         <div className="px-4 py-3 grid grid-cols-2 gap-2 bg-slate-900/50 border-t border-white/10">
-                            {initialQuestions.map((q, i) => (
+                            {t.questions.map((q, i) => (
                                 <button
                                     key={i}
                                     onClick={() => sendMessage(q)}
@@ -136,7 +184,7 @@ export default function ChatBot() {
                         <div className="p-4 bg-slate-900 border-t border-white/10 flex gap-2">
                             <input
                                 type="text"
-                                placeholder="Ask me about Woravut..."
+                                placeholder={t.placeholder}
                                 className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500/50 transition-all"
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
@@ -160,8 +208,8 @@ export default function ChatBot() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(!isOpen)}
                 className={`w-16 h-16 rounded-full shadow-2xl flex items-center justify-center text-white border transition-all duration-300 ${isOpen
-                    ? 'bg-slate-800 border-white/20'
-                    : 'bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 border-white/30'
+                        ? 'bg-slate-800 border-white/20'
+                        : 'bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 border-white/30'
                     }`}
             >
                 {isOpen ? <X className="w-7 h-7" /> : <MessageSquare className="w-7 h-7" />}

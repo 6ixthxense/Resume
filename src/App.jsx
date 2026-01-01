@@ -11,6 +11,7 @@ import pkg from '../package.json';
 
 export default function App() {
   const [showApp, setShowApp] = useState(false);
+  const [lang, setLang] = useState('en');
 
   // Collect dependencies from package.json for terminal animation
   const allDeps = { ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) };
@@ -57,12 +58,12 @@ export default function App() {
 
             {/* Content Layer */}
             <div className="absolute inset-0 z-10 overflow-y-auto scroll-smooth">
-              <ResumePage />
+              <ResumePage lang={lang} setLang={setLang} />
             </div>
 
             {/* Interactive Layer (Global Components) */}
-            <CommandPalette />
-            <ChatBot />
+            <CommandPalette lang={lang} />
+            <ChatBot lang={lang} />
           </motion.div>
         )}
       </AnimatePresence>

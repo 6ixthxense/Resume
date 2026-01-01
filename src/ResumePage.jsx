@@ -7,9 +7,12 @@ import {
   Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell
 } from 'recharts';
-import { personalInfo, professionalSummary, education, experience, projects, skills, awards, socialLinks } from "./data/resumeData";
+import { resumeData, skills, socialLinks } from "./data/resumeData";
 
-export default function ResumePage() {
+export default function ResumePage({ lang, setLang }) {
+  const data = resumeData[lang];
+  const { personalInfo, professionalSummary, education, experience, projects, awards, sections } = data;
+
   const [theme, setTheme] = useState("light");
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -90,6 +93,21 @@ export default function ResumePage() {
             transition={{ duration: 1 }}
             className="text-center relative py-12 px-6 backdrop-blur-xl bg-white/[0.02] border border-white/10 rounded-[40px] shadow-2xl transform-gpu"
           >
+            {/* Language Toggle */}
+            <div className="absolute top-6 right-6 flex gap-2">
+              <button
+                onClick={() => setLang('en')}
+                className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${lang === 'en' ? 'bg-blue-600 text-white shadow-lg' : 'bg-white/5 text-slate-400 hover:bg-white/10'}`}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLang('th')}
+                className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${lang === 'th' ? 'bg-blue-600 text-white shadow-lg' : 'bg-white/5 text-slate-400 hover:bg-white/10'}`}
+              >
+                TH
+              </button>
+            </div>
             <div className="relative inline-block mb-8 group">
               <motion.div
                 animate={{ rotate: 360 }}
@@ -108,7 +126,7 @@ export default function ResumePage() {
             </h1>
 
             <div className="flex items-center justify-center gap-2 text-2xl sm:text-3xl font-light text-blue-400 mb-8">
-              <Typical steps={personalInfo.roles} loop={Infinity} wrapper="span" />
+              <Typical key={lang} steps={personalInfo.roles} loop={Infinity} wrapper="span" />
               <span className="text-slate-400">@ {personalInfo.company}</span>
             </div>
 
@@ -147,7 +165,7 @@ export default function ResumePage() {
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all font-bold group"
               >
-                <Download className="w-6 h-6 mr-3 transition-transform group-hover:-translate-y-1" /> Get Resume
+                <Download className="w-6 h-6 mr-3 transition-transform group-hover:-translate-y-1" /> {lang === 'th' ? 'ดาวน์โหลดเรซูเม่' : 'Get Resume'}
               </motion.button>
               <motion.button
                 onClick={() => handleDownload("cv")}
@@ -155,7 +173,7 @@ export default function ResumePage() {
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/20 text-white rounded-2xl backdrop-blur-md transition-all font-bold"
               >
-                <FileText className="w-6 h-6 mr-3 text-purple-400" /> View CV
+                <FileText className="w-6 h-6 mr-3 text-purple-400" /> {lang === 'th' ? 'ดู CV' : 'View CV'}
               </motion.button>
             </div>
           </motion.header>
@@ -173,7 +191,7 @@ export default function ResumePage() {
                 <div className="p-3 bg-blue-500/20 rounded-2xl group-hover:scale-110 transition-transform">
                   <Brain className="w-8 h-8 text-blue-400" />
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight">Strategy</h2>
+                <h2 className="text-3xl font-bold tracking-tight">{sections.summary}</h2>
               </div>
               <p className="text-slate-400 leading-relaxed text-lg whitespace-pre-wrap">
                 {professionalSummary}
@@ -192,7 +210,7 @@ export default function ResumePage() {
                 <div className="p-3 bg-purple-500/20 rounded-2xl group-hover:scale-110 transition-transform">
                   <Rocket className="w-8 h-8 text-purple-400" />
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight">Foundation</h2>
+                <h2 className="text-3xl font-bold tracking-tight">{sections.education}</h2>
               </div>
               <div className="space-y-8">
                 {education.map((edu, i) => (
@@ -217,7 +235,7 @@ export default function ResumePage() {
             className="p-8 lg:p-12 bg-white/[0.02] border border-white/10 rounded-[40px] shadow-2xl relative overflow-hidden transform-gpu"
           >
             <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
-              Technical Analytics & Proficiency
+              {sections.analytics}
             </h2>
 
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -289,7 +307,7 @@ export default function ResumePage() {
             variants={containerVariants}
             className="space-y-8"
           >
-            <h2 className="text-4xl font-bold text-center mb-12">Professional Evolution</h2>
+            <h2 className="text-4xl font-bold text-center mb-12">{sections.experience}</h2>
             <div className="flex flex-col gap-6">
               {experience.map((item, i) => (
                 <motion.div
@@ -316,7 +334,7 @@ export default function ResumePage() {
             variants={containerVariants}
             className="space-y-12"
           >
-            <h2 className="text-4xl font-bold text-center">Selected Works</h2>
+            <h2 className="text-4xl font-bold text-center">{sections.projects}</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {projects.map((project, i) => (
                 <motion.div
@@ -341,7 +359,7 @@ export default function ResumePage() {
             variants={containerVariants}
             className="p-8 lg:p-12 bg-gradient-to-r from-blue-600/10 to-purple-600/10 border border-white/10 rounded-[40px] text-center"
           >
-            <h2 className="text-4xl font-bold mb-12">Recognition</h2>
+            <h2 className="text-4xl font-bold mb-12">{sections.awards}</h2>
             <div className="flex flex-wrap justify-center gap-8">
               {awards.map((award, i) => (
                 <div key={i} className="flex flex-col items-center group">
