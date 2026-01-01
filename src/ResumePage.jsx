@@ -125,7 +125,7 @@ export default function ResumePage({ lang, setLang }) {
               />
             </div>
 
-            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black tracking-tighter bg-gradient-to-b from-white to-slate-500 bg-clip-text text-transparent mb-6">
+            <h1 className={`text-6xl sm:text-7xl lg:text-8xl bg-gradient-to-b from-white to-slate-500 bg-clip-text text-transparent mb-6 pb-4 leading-tight ${lang === 'th' ? 'font-bold' : 'font-black tracking-tighter'}`}>
               {personalInfo.name}
             </h1>
 

@@ -30,6 +30,15 @@ body.lang-th h2,
 body.lang-th h3 {
   font-family: 'Sarabun', 'Inter', sans-serif;
   letter-spacing: 0;
+  line-height: 1.6 !important;
+  padding-bottom: 0.25em !important;
+}
+
+/* Also ensure bg-clip-text elements have enough vertical space */
+body.lang-th .bg-clip-text {
+  padding-bottom: 0.15em;
+  margin-bottom: -0.15em;
+  display: inline-block;
 }
 
 /* Force hardware acceleration for common animated elements */
