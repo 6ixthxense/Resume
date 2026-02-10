@@ -9,12 +9,16 @@ export default function HexRain({
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx    = canvas.getContext('2d');
-    const w      = (canvas.width  = window.innerWidth);
-    const h      = (canvas.height = window.innerHeight);
-    const cols   = columns || Math.floor(w / fontSize);
-    const drops  = Array(cols).fill(0);
+    const ctx = canvas.getContext('2d');
+    const w = (canvas.width = window.innerWidth);
+    const h = (canvas.height = window.innerHeight);
+    const isMobile = w < 768;
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const adjustedFontSize = isMobile ? fontSize * 2 : fontSize;
+    const cols = columns || Math.floor(w / adjustedFontSize);
+    const drops = Array(cols).fill(0);
     const hexChars = '0123456789';
+    const adjustedSpeed = isIOS ? speed * 3 : (isMobile ? speed * 2 : speed);
 
     function draw() {
       // สร้างเงาดำโปร่งให้ดูลากเบลอ
@@ -22,12 +26,12 @@ export default function HexRain({
       ctx.fillRect(0, 0, w, h);
 
       ctx.fillStyle = '#0F0';
-      ctx.font      = `${fontSize}px monospace`;
+      ctx.font = `${adjustedFontSize}px monospace`;
 
       for (let x = 0; x < cols; x++) {
         const char = hexChars[Math.floor(Math.random() * hexChars.length)];
-        const y     = drops[x] * fontSize;
-        ctx.fillText(char, x * fontSize, y);
+        const y = drops[x] * adjustedFontSize;
+        ctx.fillText(char, x * adjustedFontSize, y);
 
         // ถ้าละเมอเกินจอ ให้รีเซ็ต
         if (y > h && Math.random() > 0.975) {
@@ -38,8 +42,21 @@ export default function HexRain({
       }
     }
 
-    const tid = setInterval(draw, speed);
-    return () => clearInterval(tid);
+    let frameId;
+    let lastTime = 0;
+
+    function animate(time) {
+      const deltaTime = time - lastTime;
+
+      if (deltaTime > adjustedSpeed) {
+        lastTime = time;
+        draw();
+      }
+      frameId = requestAnimationFrame(animate);
+    }
+
+    frameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frameId);
   }, [fontSize, speed, columns]);
 
   return (
