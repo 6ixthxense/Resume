@@ -1,7 +1,5 @@
 {
   "projects": {
-    "go": "resume-mmicky-y"
-  },
-  "targets": {},
-  "etags": {}
+    "default": "resume-mmicky-y"
+  }
 }

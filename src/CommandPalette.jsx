@@ -9,8 +9,8 @@ const translations = {
         help: "Navigate with arrows or mouse",
         close: "ESC to close",
         sections: [
-            { id: 'summary', label: 'Professional Summary', icon: '💼' },
-            { id: 'education', label: 'Education', icon: '🎓' },
+            { id: 'summary', label: 'Professional Summary' },
+            { id: 'education', label: 'Education' },
             { id: 'experience', label: 'Experience', icon: '🧑‍💻' },
             { id: 'projects', label: 'Projects', icon: '📂' },
             { id: 'skills', label: 'Skills & Analytics', icon: '🛠' },
