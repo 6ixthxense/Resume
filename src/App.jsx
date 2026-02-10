@@ -41,7 +41,7 @@ export default function App() {
 
             {/* Global Components */}
             <CommandPalette lang={lang} />
-            <ChatBot lang={lang} />
+            <ChatBot lang={lang} isDark={isDark} />
           </motion.div>
         )}
       </AnimatePresence>

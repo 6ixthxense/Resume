@@ -32,7 +32,7 @@ const translations = {
     }
 };
 
-export default function ChatBot({ lang = 'en' }) {
+export default function ChatBot({ lang = 'en', isDark = true }) {
     const [isOpen, setIsOpen] = useState(false);
     const t = translations[lang] || translations.en;
     const data = resumeData[lang] || resumeData.en;
@@ -116,7 +116,8 @@ export default function ChatBot({ lang = 'en' }) {
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                        className="mb-4 w-[calc(100vw-32px)] sm:w-[380px] h-[550px] bg-slate-900/98 backdrop-blur-lg border border-white/10 rounded-[2rem] shadow-2xl flex flex-col overflow-hidden transform-gpu"
+                        className={`mb-4 w-[calc(100vw-32px)] sm:w-[380px] h-[550px] backdrop-blur-lg border rounded-[2rem] shadow-2xl flex flex-col overflow-hidden transform-gpu
+                            ${isDark ? 'bg-slate-900/98 border-white/10' : 'bg-white/95 border-slate-200'}`}
                     >
                         {/* Header */}
                         <div className="p-5 bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-between shadow-lg">
@@ -139,7 +140,7 @@ export default function ChatBot({ lang = 'en' }) {
                         </div>
 
                         {/* Chat Area */}
-                        <div className="flex-1 overflow-y-auto p-5 space-y-4 scrollbar-hide bg-slate-950/30">
+                        <div className={`flex-1 overflow-y-auto p-5 space-y-4 scrollbar-hide ${isDark ? 'bg-slate-950/30' : 'bg-slate-50'}`}>
                             {messages.map((msg, i) => (
                                 <motion.div
                                     key={i}
@@ -148,8 +149,10 @@ export default function ChatBot({ lang = 'en' }) {
                                     className={`flex ${msg.role === 'bot' ? 'justify-start' : 'justify-end'}`}
                                 >
                                     <div className={`max-w-[85%] p-4 rounded-2xl text-[13px] leading-relaxed shadow-sm ${msg.role === 'bot'
-                                        ? 'bg-white/10 text-slate-200 rounded-tl-none border border-white/5'
-                                        : 'bg-blue-600 text-white rounded-tr-none shadow-blue-900/20'
+                                            ? isDark
+                                                ? 'bg-white/10 text-slate-200 rounded-tl-none border border-white/5'
+                                                : 'bg-white text-slate-700 rounded-tl-none border border-slate-200 shadow-sm'
+                                            : 'bg-blue-600 text-white rounded-tr-none shadow-blue-900/20'
                                         }`}>
                                         {msg.text}
                                     </div>
@@ -157,7 +160,10 @@ export default function ChatBot({ lang = 'en' }) {
                             ))}
                             {isTyping && (
                                 <div className="flex justify-start">
-                                    <div className="bg-white/10 p-3 rounded-2xl rounded-tl-none flex gap-1.5 border border-white/5">
+                                    <div className={`p-3 rounded-2xl rounded-tl-none flex gap-1.5 border ${isDark
+                                            ? 'bg-white/10 border-white/5'
+                                            : 'bg-white border-slate-200'
+                                        }`}>
                                         <span className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce"></span>
                                         <span className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce delay-75"></span>
                                         <span className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce delay-150"></span>
@@ -168,12 +174,15 @@ export default function ChatBot({ lang = 'en' }) {
                         </div>
 
                         {/* Quick Questions Grid */}
-                        <div className="px-4 py-3 grid grid-cols-2 gap-2 bg-slate-900/50 border-t border-white/10">
+                        <div className={`px-4 py-3 grid grid-cols-2 gap-2 border-t ${isDark ? 'bg-slate-900/50 border-white/10' : 'bg-white border-slate-200'}`}>
                             {t.questions.map((q, i) => (
                                 <button
                                     key={i}
                                     onClick={() => sendMessage(q)}
-                                    className="px-3 py-2.5 bg-white/5 hover:bg-blue-600/20 border border-white/5 rounded-xl text-[11px] text-slate-400 hover:text-blue-200 transition-all text-left font-medium leading-tight group"
+                                    className={`px-3 py-2.5 border rounded-xl text-[11px] transition-all text-left font-medium leading-tight group ${isDark
+                                            ? 'bg-white/5 hover:bg-blue-600/20 border-white/5 text-slate-400 hover:text-blue-200'
+                                            : 'bg-slate-50 hover:bg-blue-50 border-slate-200 text-slate-600 hover:text-blue-600'
+                                        }`}
                                 >
                                     {q}
                                 </button>
@@ -181,11 +190,14 @@ export default function ChatBot({ lang = 'en' }) {
                         </div>
 
                         {/* Input Area */}
-                        <div className="p-4 bg-slate-900 border-t border-white/10 flex gap-2">
+                        <div className={`p-4 border-t flex gap-2 ${isDark ? 'bg-slate-900 border-white/10' : 'bg-white border-slate-200'}`}>
                             <input
                                 type="text"
                                 placeholder={t.placeholder}
-                                className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500/50 transition-all"
+                                className={`flex-1 border rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500/50 transition-all ${isDark
+                                        ? 'bg-white/5 border-white/10 text-white placeholder-slate-500'
+                                        : 'bg-slate-100 border-slate-200 text-slate-800 placeholder-slate-400'
+                                    }`}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter') {
                                         sendMessage(e.target.value);
@@ -207,9 +219,11 @@ export default function ChatBot({ lang = 'en' }) {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(!isOpen)}
-                className={`w-16 h-16 rounded-full shadow-2xl flex items-center justify-center text-white border transition-all duration-300 ${isOpen
-                    ? 'bg-slate-800 border-white/20'
-                    : 'bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 border-white/30'
+                className={`w-16 h-16 rounded-full shadow-2xl flex items-center justify-center border transition-all duration-300 ${isOpen
+                    ? isDark
+                        ? 'bg-slate-800 border-white/20 text-white'
+                        : 'bg-white border-slate-200 text-slate-700'
+                    : 'bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 border-white/30 text-white'
                     }`}
             >
                 {isOpen ? <X className="w-7 h-7" /> : <MessageSquare className="w-7 h-7" />}
