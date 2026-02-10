@@ -415,8 +415,14 @@ export default function ResumePage({ lang, setLang, theme, setTheme }) {
             <h2 id="exp-heading" className="text-3xl sm:text-4xl font-bold text-center">🚀 {sections.experience}</h2>
             <div className="relative">
               <div className={`absolute left-6 sm:left-8 top-0 bottom-0 w-px ${isDark ? 'bg-gradient-to-b from-blue-500 via-purple-500 to-transparent' : 'bg-gradient-to-b from-blue-400 via-purple-400 to-transparent'} print:bg-slate-300`} aria-hidden="true" />
-              <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                <LangTransition lang={lang} className="space-y-8">
+              <LangTransition lang={lang}>
+                <motion.div
+                  variants={staggerContainer}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="space-y-8"
+                >
                   {experience.map((item, i) => (
                     <motion.div key={i} variants={staggerItem} className="relative pl-16 sm:pl-20">
                       <div className={`absolute left-4 sm:left-6 w-4 h-4 rounded-full border-2 ${i === 0 ? 'bg-blue-500 border-blue-400 shadow-[0_0_12px_rgba(59,130,246,0.5)]' : isDark ? 'bg-slate-800 border-slate-600' : 'bg-white border-slate-300'} z-10`} aria-hidden="true" />
@@ -438,16 +444,22 @@ export default function ResumePage({ lang, setLang, theme, setTheme }) {
                       </article>
                     </motion.div>
                   ))}
-                </LangTransition>
-              </motion.div>
+                </motion.div>
+              </LangTransition>
             </div>
           </motion.section>
 
           {/* ═══════════════ PROJECTS ═══════════════ */}
           <motion.section id="projects" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={containerVariants} className="space-y-10" aria-labelledby="proj-heading">
             <h2 id="proj-heading" className="text-3xl sm:text-4xl font-bold text-center">💻 {sections.projects}</h2>
-            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-              <LangTransition lang={lang} className="grid md:grid-cols-2 gap-6">
+            <LangTransition lang={lang}>
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="grid md:grid-cols-2 gap-6"
+              >
                 {projects.map((project, i) => (
                   <motion.article key={i} variants={staggerItem} whileHover={{ y: -6 }}
                     className={`p-6 sm:p-8 ${isDark ? 'bg-gradient-to-br from-white/[0.05] to-transparent border-white/10 hover:border-blue-500/40' : 'bg-white/70 border-white/30 hover:border-blue-300'} border rounded-[28px] transition-all group cursor-pointer flex flex-col print:border-slate-200 print:bg-white`}
@@ -470,8 +482,8 @@ export default function ResumePage({ lang, setLang, theme, setTheme }) {
                     <div className={`text-xs font-mono ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>{project.period}</div>
                   </motion.article>
                 ))}
-              </LangTransition>
-            </motion.div>
+              </motion.div>
+            </LangTransition>
           </motion.section>
 
           {/* ═══════════════ CERTIFICATIONS (HIDDEN FOR NOW) ═══════════════ */}
@@ -499,8 +511,14 @@ export default function ResumePage({ lang, setLang, theme, setTheme }) {
             aria-labelledby="awards-heading"
           >
             <h2 id="awards-heading" className="text-3xl sm:text-4xl font-bold text-center mb-12">🏆 {sections.awards}</h2>
-            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-              <LangTransition lang={lang} className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            <LangTransition lang={lang}>
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto"
+              >
                 {awards.map((award, i) => (
                   <motion.div key={i} variants={staggerItem} whileHover={{ scale: 1.03, y: -4 }}
                     className={`p-6 ${isDark ? 'bg-white/[0.03] border-white/10' : 'bg-white/70 border-amber-200/30'} border rounded-3xl text-center group transition-all`}
@@ -514,15 +532,21 @@ export default function ResumePage({ lang, setLang, theme, setTheme }) {
                     <span className={`inline-block px-3 py-1 ${isDark ? 'bg-white/5 border-white/10 text-amber-400' : 'bg-amber-100/50 border-amber-200 text-amber-600'} border rounded-full text-xs font-mono`}>{award.year}</span>
                   </motion.div>
                 ))}
-              </LangTransition>
-            </motion.div>
+              </motion.div>
+            </LangTransition>
           </motion.section>
 
           {/* ═══════════════ TESTIMONIALS ═══════════════ */}
           <motion.section id="testimonials" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={containerVariants} className="space-y-10" aria-labelledby="test-heading">
             <h2 id="test-heading" className="text-3xl sm:text-4xl font-bold text-center">💬 {sections.testimonials}</h2>
-            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-              <LangTransition lang={lang} className="grid md:grid-cols-2 gap-6">
+            <LangTransition lang={lang}>
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="grid md:grid-cols-2 gap-6"
+              >
                 {testimonials.map((t, i) => (
                   <motion.blockquote key={i} variants={staggerItem}
                     className={`p-6 sm:p-8 ${isDark ? 'bg-white/[0.03] border-white/10' : 'bg-white/60 border-white/30'} border rounded-3xl relative group`}
@@ -538,15 +562,21 @@ export default function ResumePage({ lang, setLang, theme, setTheme }) {
                     <p className={`${isDark ? 'text-slate-300' : 'text-slate-600'} leading-relaxed text-sm italic`}>"{t.text}"</p>
                   </motion.blockquote>
                 ))}
-              </LangTransition>
-            </motion.div>
+              </motion.div>
+            </LangTransition>
           </motion.section>
 
           {/* ═══════════════ BLOG / ARTICLES ═══════════════ */}
           <motion.section id="blog" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={containerVariants} className="space-y-10" aria-labelledby="blog-heading">
             <h2 id="blog-heading" className="text-3xl sm:text-4xl font-bold text-center">📝 {sections.blog}</h2>
-            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-              <LangTransition lang={lang} className="grid md:grid-cols-3 gap-6">
+            <LangTransition lang={lang}>
+              <motion.div
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="grid md:grid-cols-3 gap-6"
+              >
                 {blog.map((post, i) => (
                   <motion.article key={i} variants={staggerItem} whileHover={{ y: -6 }}
                     className={`p-6 ${isDark ? 'bg-white/[0.03] border-white/10 hover:border-indigo-500/30' : 'bg-white/60 border-white/30 hover:border-indigo-300'} border rounded-3xl transition-all group cursor-pointer flex flex-col`}
@@ -561,8 +591,8 @@ export default function ResumePage({ lang, setLang, theme, setTheme }) {
                     </div>
                   </motion.article>
                 ))}
-              </LangTransition>
-            </motion.div>
+              </motion.div>
+            </LangTransition>
           </motion.section>
 
           {/* ═══════════════ GITHUB HEATMAP ═══════════════ */}
