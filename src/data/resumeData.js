@@ -324,14 +324,54 @@ export const resumeData = {
 };
 
 export const skills = [
-  { name: "Python", level: 95, color: "from-blue-400 to-cyan-400" },
-  { name: "Power BI", level: 80, color: "from-yellow-400 to-orange-400" },
-  { name: "R", level: 75, color: "from-blue-500 to-indigo-500" },
-  { name: "JavaScript", level: 80, color: "from-yellow-300 to-amber-400" },
-  { name: "HTML", level: 80, color: "from-orange-400 to-red-500" },
-  { name: "CSS", level: 80, color: "from-blue-400 to-purple-500" },
-  { name: "Google Sheets", level: 75, color: "from-green-400 to-emerald-500" },
-  { name: "SQL", level: 65, color: "from-slate-400 to-blue-400" }
+  {
+    name: "Python",
+    category: { en: "Data & Backend", th: "ข้อมูล & ระบบหลังบ้าน" },
+    useCase: { en: "Data analysis, machine learning models, and robust backend services", th: "วิเคราะห์ข้อมูล, สร้างโมเดล Machine Learning และพัฒนาระบบหลังบ้าน" },
+    color: "from-blue-400 to-cyan-400"
+  },
+  {
+    name: "Power BI",
+    category: { en: "Visualization", th: "การแสดงผลข้อมูล" },
+    useCase: { en: "Interactive dashboards and executive-level business reporting", th: "สร้างแพลตฟอร์มแดชบอร์ดแบบ Interactive และรายงานสรุปสำหรับผู้บริหาร" },
+    color: "from-yellow-400 to-orange-400"
+  },
+  {
+    name: "SQL",
+    category: { en: "Database Management", th: "การจัดการฐานข้อมูล" },
+    useCase: { en: "Executing complex queries and managing relational database systems", th: "เขียน Query ที่ซับซ้อนและจัดการระบบฐานข้อมูลเชิงสัมพันธ์" },
+    color: "from-slate-400 to-blue-400"
+  },
+  {
+    name: "JavaScript",
+    category: { en: "Web Development", th: "พัฒนาเว็บแอปพลิเคชัน" },
+    useCase: { en: "Building dynamic user interfaces and full-stack web applications", th: "สร้าง User Interfaces แบบไดนามิกและเว็บแอปพลิเคชันแบบ Full-stack" },
+    color: "from-yellow-300 to-amber-400"
+  },
+  {
+    name: "R",
+    category: { en: "Statistical Analysis", th: "การวิเคราะห์สถิติ" },
+    useCase: { en: "Advanced statistical computing and rigorous data analysis", th: "การคำนวณทางสถิติขั้นสูงและการวิเคราะห์ข้อมูลเชิงลึก" },
+    color: "from-blue-500 to-indigo-500"
+  },
+  {
+    name: "Google Sheets",
+    category: { en: "Data Processing", th: "การประมวลผลข้อมูล" },
+    useCase: { en: "Automation, reporting, and quick data manipulation for teams", th: "ระบบอัตโนมัติ, การทำรายงาน และการจัดการข้อมูลเบื้องต้นสำหรับทีม" },
+    color: "from-green-400 to-emerald-500"
+  },
+  {
+    name: "HTML",
+    category: { en: "Web Foundation", th: "รากฐานโครงสร้างเว็บ" },
+    useCase: { en: "Structuring accessible and SEO-friendly web content", th: "สร้างโครงสร้างเว็บที่รองรับ Accessibility และเป็นมิตรกับ SEO" },
+    color: "from-orange-400 to-red-500"
+  },
+  {
+    name: "CSS",
+    category: { en: "UI Styling", th: "การตกแต่ง UI" },
+    useCase: { en: "Crafting beautiful, responsive, and animated user interfaces", th: "ออกแบบหน้าจอให้สวยงาม รองรับทุกขนาดหน้าจอ และมีแอนิเมชัน" },
+    color: "from-blue-400 to-purple-500"
+  }
 ];
 
 export const socialLinks = {
