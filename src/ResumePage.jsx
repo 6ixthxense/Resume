@@ -1,84 +1,26 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Download, FileText, Mail, Github, Linkedin, Instagram, Facebook, Brain, Phone, Sun, Moon, ArrowUp, GraduationCap, Code, Trophy, ChevronRight, Quote } from "lucide-react";
-import { FaPython, FaJs, FaHtml5, FaCss3, FaDatabase, FaChartBar, FaChartLine, FaFileExcel } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { ArrowUp } from "lucide-react";
 import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
-import Typical from "react-typical";
 
-import { resumeData, skills, socialLinks } from "./data/resumeData";
+import { resumeData, socialLinks, skills as skillsData } from "./data/resumeData";
 import GitHubHeatmap from "./GitHubHeatmap";
 
-// ─── Skeleton Loader ──────────────────────────────────────
-// eslint-disable-next-line no-unused-vars
-function Skeleton({ className = "" }) {
-  return (
-    <div className={`animate-pulse rounded-2xl ${className}`} role="status" aria-label="Loading">
-      <span className="sr-only">Loading...</span>
-    </div>
-  );
-}
+// Import new components
+import Header from "./components/Header";
+import Summary from "./components/Summary";
+import Education from "./components/Education";
+import Skills from "./components/Skills";
+import Experience from "./components/Experience";
+import Projects from "./components/Projects";
+import Awards from "./components/Awards";
+import Testimonials from "./components/Testimonials";
+import Blog from "./components/Blog";
+import Footer from "./components/Footer";
+import FloatingNav from "./components/ui/FloatingNav";
 
-// SectionSkeleton available for lazy-loaded sections
-// function SectionSkeleton({ isDark }) { ... }
-
-// ─── Animated Counter ─────────────────────────────────────
-function AnimatedCounter({ value, suffix = "", duration = 2 }) {
-  const [count, setCount] = useState(0);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          let start = 0;
-          const end = value;
-          const stepTime = (duration * 1000) / end;
-          const timer = setInterval(() => {
-            start += 1;
-            setCount(start);
-            if (start >= end) clearInterval(timer);
-          }, stepTime);
-        }
-      },
-      { threshold: 0.5 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [value, duration, hasAnimated]);
-
-  return <span ref={ref}>{count}{suffix}</span>;
-}
-
-// ─── Language Transition Wrapper ──────────────────────────
-// ─── Language Transition Wrapper ──────────────────────────
-function LangTransition({ children, lang, className = "" }) {
-  return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={lang}
-        className={className}
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -8 }}
-        transition={{ duration: 0.3 }}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════
-// MAIN COMPONENT
-// ═══════════════════════════════════════════════════════════
 export default function ResumePage({ lang, setLang, theme, setTheme }) {
   const data = resumeData[lang];
-  const { personalInfo, professionalSummary, education, experience, projects, awards, sections } = data;
-  const stats = data.stats;
-  const testimonials = data.testimonials;
-
-  const blog = data.blog;
+  const { personalInfo, professionalSummary, education, experience, projects, awards, sections, stats, testimonials, blog } = data;
 
   const [showBackToTop, setShowBackToTop] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -112,22 +54,6 @@ export default function ResumePage({ lang, setLang, theme, setTheme }) {
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
-  };
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.12 } }
-  };
-  const staggerItem = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
-  };
-
-
-
   return (
     <div className="relative selection:bg-blue-500/30" role="main">
       {/* Skip to content link for accessibility */}
@@ -143,7 +69,7 @@ export default function ResumePage({ lang, setLang, theme, setTheme }) {
         aria-label="Page scroll progress"
       />
 
-      <div className={`min-h-screen ${isDark ? 'bg-slate-950 text-slate-200' : 'bg-slate-50 text-slate-800'} p-4 sm:p-6 lg:p-12 transition-colors duration-500 relative overflow-hidden`}>
+      <div className={`min-h-screen ${isDark ? 'bg-slate-950 text-slate-200' : 'bg-slate-5 text-slate-800'} p-4 sm:p-6 lg:p-12 transition-colors duration-500 relative overflow-hidden`}>
 
         {/* Ambient Blobs */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10 translate-z-0 print:hidden" aria-hidden="true">
@@ -160,486 +86,83 @@ export default function ResumePage({ lang, setLang, theme, setTheme }) {
         </div>
 
         <div className="max-w-6xl mx-auto space-y-16">
+          <Header 
+            lang={lang} 
+            setLang={setLang} 
+            theme={theme} 
+            setTheme={setTheme} 
+            personalInfo={personalInfo} 
+            socialLinks={socialLinks} 
+            stats={stats} 
+            handleDownload={handleDownload} 
+          />
 
-          {/* ═══════════════ HEADER ═══════════════ */}
-          <motion.header
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            className={`relative py-16 px-8 backdrop-blur-xl ${isDark ? 'bg-white/[0.02] border-white/10' : 'bg-white/60 border-white/30'} border rounded-[40px] shadow-2xl transform-gpu flex flex-col items-center text-center print:shadow-none print:border-slate-200 print:bg-white`}
-            role="banner"
-          >
-            {/* Top Controls */}
-            <div className="absolute top-6 right-6 flex gap-2 items-center print:hidden" role="toolbar" aria-label="Settings">
-              <button
-                onClick={() => setTheme(isDark ? "light" : "dark")}
-                className={`p-2 rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 ${isDark ? 'bg-white/5 hover:bg-white/10 text-slate-400' : 'bg-slate-200 hover:bg-slate-300 text-slate-600'}`}
-                aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-              >
-                {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              </button>
-              <div className={`h-5 w-px ${isDark ? 'bg-white/10' : 'bg-slate-300'}`} aria-hidden="true" />
-              <button
-                onClick={() => setLang('en')}
-                className={`px-3 py-1 rounded-full text-xs font-bold transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 ${lang === 'en' ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' : isDark ? 'bg-white/5 text-slate-400 hover:bg-white/10' : 'bg-slate-200 text-slate-500 hover:bg-slate-300'}`}
-                aria-label="Switch to English"
-                aria-pressed={lang === 'en'}
-              >
-                EN
-              </button>
-              <button
-                onClick={() => setLang('th')}
-                className={`px-3 py-1 rounded-full text-xs font-bold transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 ${lang === 'th' ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' : isDark ? 'bg-white/5 text-slate-400 hover:bg-white/10' : 'bg-slate-200 text-slate-500 hover:bg-slate-300'}`}
-                aria-label="เปลี่ยนเป็นภาษาไทย"
-                aria-pressed={lang === 'th'}
-              >
-                TH
-              </button>
-            </div>
-
-            {/* Profile Image + Status Badge */}
-            <div className="relative mb-10 group">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-[-8px] rounded-full bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500 opacity-50 blur-md group-hover:opacity-100 transition-opacity print:hidden"
-                aria-hidden="true"
-              />
-              <img
-                src={personalInfo.profileImage}
-                alt={`${personalInfo.name}`}
-                className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full mx-auto shadow-2xl border-4 border-slate-900 object-cover z-10 print:border-slate-300 print:w-32 print:h-32"
-              />
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 px-4 py-1.5 bg-emerald-500/90 backdrop-blur-sm rounded-full shadow-lg shadow-emerald-500/20 print:bg-emerald-600">
-                <span className="w-2 h-2 bg-white rounded-full animate-pulse print:animate-none" aria-hidden="true" />
-                <span className="text-[10px] font-bold text-white uppercase tracking-wider whitespace-nowrap">{personalInfo.status}</span>
-              </div>
-            </div>
-
-            <LangTransition lang={lang}>
-              <h1 className={`text-5xl sm:text-6xl lg:text-7xl bg-gradient-to-b ${isDark ? 'from-white to-slate-500' : 'from-slate-800 to-slate-500'} bg-clip-text text-transparent mb-6 pb-4 leading-tight ${lang === 'th' ? 'font-bold' : 'font-black tracking-tighter'} print:text-slate-900 print:text-4xl`}>
-                {personalInfo.name}
-              </h1>
-            </LangTransition>
-
-            <div className={`flex items-center justify-center gap-2 text-xl sm:text-2xl font-light ${isDark ? 'text-blue-400' : 'text-blue-600'} mb-8 print:text-blue-700`}>
-              <Typical key={lang} steps={personalInfo.roles} loop={Infinity} wrapper="span" />
-              <span className={isDark ? 'text-slate-400' : 'text-slate-500'}>@ {personalInfo.company}</span>
-            </div>
-
-            {/* Contact */}
-            <div className="flex flex-wrap justify-center gap-3 mb-8">
-              <a href={`mailto:${personalInfo.email}`} className={`flex items-center gap-2 px-5 py-2.5 ${isDark ? 'bg-white/5 hover:bg-white/10 border-white/10' : 'bg-slate-100 hover:bg-slate-200 border-slate-200'} border rounded-full text-sm transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500`} aria-label={`Send email to ${personalInfo.email}`}>
-                <Mail className="w-4 h-4 text-blue-400" /> {personalInfo.email}
-              </a>
-              <div className={`flex items-center gap-2 px-5 py-2.5 ${isDark ? 'bg-white/5 border-white/10' : 'bg-slate-100 border-slate-200'} border rounded-full text-sm`}>
-                <Phone className="w-4 h-4 text-purple-400" /> {personalInfo.phone}
-              </div>
-            </div>
-
-            {/* Social */}
-            <nav className="flex justify-center gap-4 mb-10 print:hidden" aria-label="Social links">
-              {[
-                { icon: Github, url: socialLinks.github, label: "GitHub", color: 'hover:text-white hover:bg-slate-700' },
-                { icon: Linkedin, url: socialLinks.linkedin, label: "LinkedIn", color: 'hover:text-white hover:bg-blue-600' },
-                { icon: Instagram, url: socialLinks.instagram, label: "Instagram", color: 'hover:text-white hover:bg-pink-600' },
-                { icon: Facebook, url: socialLinks.facebook, label: "Facebook", color: 'hover:text-white hover:bg-blue-700' }
-              ].map((social, i) => (
-                <motion.a
-                  key={i}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ y: -5, scale: 1.1 }}
-                  className={`p-3 ${isDark ? 'bg-white/5 border-white/10 text-slate-400' : 'bg-slate-100 border-slate-200 text-slate-500'} rounded-2xl border transition-all ${social.color} focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-5 h-5" />
-                </motion.a>
-              ))}
-            </nav>
-
-            {/* Download */}
-            <div className="flex flex-wrap justify-center gap-4 mb-12 print:hidden">
-              <motion.button
-                onClick={() => handleDownload("resume")}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center px-7 py-3.5 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-2xl shadow-[0_0_30px_rgba(37,99,235,0.3)] transition-all font-bold group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
-                <Download className="w-5 h-5 mr-2 transition-transform group-hover:-translate-y-0.5" /> {lang === 'th' ? 'ดาวน์โหลดเรซูเม่' : 'Get Resume'}
-              </motion.button>
-              <motion.button
-                onClick={() => handleDownload("cv")}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`flex items-center px-7 py-3.5 ${isDark ? 'bg-white/5 hover:bg-white/10 border-white/20' : 'bg-white hover:bg-slate-50 border-slate-200'} border rounded-2xl backdrop-blur-md transition-all font-bold focus:outline-none focus:ring-2 focus:ring-blue-500`}
-              >
-                <FileText className="w-5 h-5 mr-2 text-purple-400" /> {lang === 'th' ? 'ดู CV' : 'View CV'}
-              </motion.button>
-            </div>
-
-            {/* Hero Stats */}
-            <div className="w-full max-w-2xl" role="list" aria-label="Statistics">
-              <LangTransition lang={lang} className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-                {stats.map((stat, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8 + i * 0.15 }}
-                    className="text-center"
-                    role="listitem"
-                  >
-                    <div className={`text-3xl sm:text-4xl font-black ${isDark ? 'text-white' : 'text-slate-800'} print:text-slate-900`}>
-                      <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                    </div>
-                    <div className={`text-xs sm:text-sm font-medium mt-1 ${isDark ? 'text-slate-500' : 'text-slate-400'} uppercase tracking-wider`}>
-                      {stat.label}
-                    </div>
-                  </motion.div>
-                ))}
-              </LangTransition>
-            </div>
-          </motion.header>
-
-          {/* ═══════════════ SUMMARY + EDUCATION ═══════════════ */}
           <div className="grid lg:grid-cols-2 gap-8">
-            <motion.section id="summary" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants}
-              className={`p-8 ${isDark ? 'bg-white/[0.03] border-white/10 hover:border-blue-500/30' : 'bg-white/60 border-white/30 hover:border-blue-300'} backdrop-blur-lg border rounded-[32px] transition-colors group transform-gpu print:border-slate-200 print:bg-white`}
-              aria-labelledby="summary-heading"
-            >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 bg-blue-500/20 rounded-2xl group-hover:scale-110 transition-transform">
-                  <Brain className="w-7 h-7 text-blue-400" />
-                </div>
-                <h2 id="summary-heading" className="text-2xl sm:text-3xl font-bold tracking-tight">💼 {sections.summary}</h2>
-              </div>
-              <LangTransition lang={lang}>
-                <p className={`${isDark ? 'text-slate-400' : 'text-slate-600'} leading-relaxed text-base whitespace-pre-wrap print:text-slate-700`}>
-                  {professionalSummary}
-                </p>
-              </LangTransition>
-            </motion.section>
-
-            <motion.section id="education" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants}
-              className={`p-8 ${isDark ? 'bg-white/[0.03] border-white/10 hover:border-purple-500/30' : 'bg-white/60 border-white/30 hover:border-purple-300'} backdrop-blur-lg border rounded-[32px] transition-colors group transform-gpu print:border-slate-200 print:bg-white`}
-              aria-labelledby="education-heading"
-            >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 bg-purple-500/20 rounded-2xl group-hover:scale-110 transition-transform">
-                  <GraduationCap className="w-7 h-7 text-purple-400" />
-                </div>
-                <h2 id="education-heading" className="text-2xl sm:text-3xl font-bold tracking-tight">🎓 {sections.education}</h2>
-              </div>
-              <LangTransition lang={lang}>
-                <div className="space-y-8">
-                  {education.map((edu, i) => (
-                    <div key={i} className="space-y-2">
-                      <h3 className={`text-xl font-bold ${isDark ? 'text-white' : 'text-slate-800'}`}>{edu.degree}</h3>
-                      <p className="text-purple-400 font-medium">{edu.institution}</p>
-                      <div className={`inline-block px-4 py-1.5 ${isDark ? 'bg-white/5 border-white/10' : 'bg-slate-100 border-slate-200'} border rounded-full text-sm text-slate-500 font-mono`}>
-                        {edu.period}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </LangTransition>
-            </motion.section>
+            <Summary 
+              lang={lang} 
+              isDark={isDark} 
+              sections={sections} 
+              professionalSummary={professionalSummary} 
+            />
+            <Education 
+              lang={lang} 
+              isDark={isDark} 
+              sections={sections} 
+              education={education} 
+            />
           </div>
 
-          {/* ═══════════════ SKILLS (BENTO BOX) ═══════════════ */}
-          <motion.section id="skills" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={containerVariants}
-            className={`p-8 lg:p-12 ${isDark ? 'bg-white/[0.02] border-white/10' : 'bg-white/60 border-white/30'} border rounded-[40px] shadow-2xl relative overflow-hidden transform-gpu print:shadow-none print:border-slate-200`}
-            aria-labelledby="skills-heading"
-          >
-            {/* Ambient Background Glow for Skills */}
-            <div className={`absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none`} aria-hidden="true" />
-            <div className={`absolute bottom-0 left-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none`} aria-hidden="true" />
+          <Skills 
+            lang={lang} 
+            isDark={isDark} 
+            sections={sections} 
+            skills={skillsData || []} 
+          />
 
-            <h2 id="skills-heading" className="text-3xl sm:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent print:text-slate-800 relative z-10">
-              ⚡ {sections.analytics}
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6 relative z-10">
-              {skills.map((skill, i) => {
-                const icons = {
-                  "Python": <FaPython className="text-blue-400 text-3xl" />,
-                  "Power BI": <FaChartBar className="text-yellow-400 text-3xl" />,
-                  "R": <FaChartLine className="text-blue-500 text-3xl" />,
-                  "JavaScript": <FaJs className="text-yellow-300 text-3xl" />,
-                  "HTML": <FaHtml5 className="text-orange-500 text-3xl" />,
-                  "CSS": <FaCss3 className="text-blue-500 text-3xl" />,
-                  "Google Sheets": <FaFileExcel className="text-green-500 text-3xl" />,
-                  "SQL": <FaDatabase className="text-slate-400 text-3xl" />
-                };
+          <Experience 
+            lang={lang} 
+            isDark={isDark} 
+            sections={sections} 
+            experience={experience} 
+          />
 
-                // Bento grid spanning logic
-                let spanClass = "col-span-1";
-                if (i === 0) spanClass = "col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2";
-                else if (i === 3) spanClass = "col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2";
-                else if (i === 6) spanClass = "col-span-1 sm:col-span-1 md:col-span-2 lg:col-span-2";
-                else if (i === 7) spanClass = "col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2";
+          <Projects 
+            lang={lang} 
+            isDark={isDark} 
+            sections={sections} 
+            projects={projects} 
+          />
 
-                return (
-                  <motion.div key={i} variants={staggerItem} whileHover={{ y: -4, scale: 1.01 }}
-                    className={`p-6 sm:p-8 ${spanClass} ${isDark ? 'bg-white/[0.03] border-white/10 hover:bg-white/[0.05]' : 'bg-white/70 border-white/40 hover:bg-white/90'} border rounded-[32px] flex flex-col justify-between gap-4 transition-all duration-300 group relative overflow-hidden print:border-slate-200 print:bg-white backdrop-blur-xl shadow-lg hover:shadow-2xl`}
-                  >
-                    {/* Giant blurred background icon */}
-                    <div className="absolute -bottom-6 -right-6 text-9xl opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-500 transform group-hover:scale-110 group-hover:-rotate-12 pointer-events-none" aria-hidden="true">
-                      {icons[skill.name]}
-                    </div>
+          <Awards 
+            lang={lang} 
+            isDark={isDark} 
+            sections={sections} 
+            awards={awards} 
+          />
 
-                    {/* Animated gradient top border on hover */}
-                    <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${skill.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+          <Testimonials 
+            lang={lang} 
+            isDark={isDark} 
+            sections={sections} 
+            testimonials={testimonials} 
+          />
 
-                    <div className="flex items-start justify-between relative z-10">
-                      <div className={`p-3.5 rounded-2xl ${isDark ? 'bg-white/5 border border-white/10' : 'bg-white border border-slate-100'} shadow-sm group-hover:scale-110 transition-transform duration-300`} aria-hidden="true">
-                        {icons[skill.name]}
-                      </div>
-                      <div className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${isDark ? 'bg-white/5 text-slate-400' : 'bg-slate-100 text-slate-500'} group-hover:bg-gradient-to-r group-hover:${skill.color.split(' ')[0]} group-hover:${skill.color.split(' ')[1]} hover:!text-white transition-all duration-300`}>
-                        {skill.category?.[lang] || "Core"}
-                      </div>
-                    </div>
+          <Blog 
+            lang={lang} 
+            isDark={isDark} 
+            sections={sections} 
+            blog={blog} 
+          />
 
-                    <div className="relative z-10 mt-2">
-                      <h3 className={`text-2xl font-black mb-2 ${isDark ? 'text-slate-100 group-hover:text-white' : 'text-slate-800'}`}>{skill.name}</h3>
-                      <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-400 group-hover:text-slate-300' : 'text-slate-600'}`}>
-                        {skill.useCase?.[lang] || skill.useCase?.en}
-                      </p>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.section>
-
-          {/* ═══════════════ EXPERIENCE TIMELINE ═══════════════ */}
-          <motion.section id="experience" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={containerVariants} className="space-y-10" aria-labelledby="exp-heading">
-            <h2 id="exp-heading" className="text-3xl sm:text-4xl font-bold text-center">🚀 {sections.experience}</h2>
-            <div className="relative">
-              <div className={`absolute left-6 sm:left-8 top-0 bottom-0 w-px ${isDark ? 'bg-gradient-to-b from-blue-500 via-purple-500 to-transparent' : 'bg-gradient-to-b from-blue-400 via-purple-400 to-transparent'} print:bg-slate-300`} aria-hidden="true" />
-              <LangTransition lang={lang}>
-                <motion.div
-                  variants={staggerContainer}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  className="space-y-8"
-                >
-                  {experience.map((item, i) => (
-                    <motion.div key={i} variants={staggerItem} className="relative pl-16 sm:pl-20">
-                      <div className={`absolute left-4 sm:left-6 w-4 h-4 rounded-full border-2 ${i === 0 ? 'bg-blue-500 border-blue-400 shadow-[0_0_12px_rgba(59,130,246,0.5)]' : isDark ? 'bg-slate-800 border-slate-600' : 'bg-white border-slate-300'} z-10`} aria-hidden="true" />
-                      <article className={`p-6 sm:p-8 ${isDark ? 'bg-white/[0.03] border-white/10 hover:border-blue-500/30' : 'bg-white/70 border-white/30 hover:border-blue-300'} border rounded-3xl transition-all group print:border-slate-200 print:bg-white`}>
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
-                          <h3 className={`text-xl font-bold ${isDark ? 'text-white group-hover:text-blue-400' : 'text-slate-800 group-hover:text-blue-600'} transition-colors`}>{item.title}</h3>
-                          <span className={`inline-flex items-center px-3 py-1 ${isDark ? 'bg-white/5 border-white/10' : 'bg-slate-100 border-slate-200'} border rounded-full text-xs font-mono ${isDark ? 'text-slate-400' : 'text-slate-500'} whitespace-nowrap`}>{item.period}</span>
-                        </div>
-                        <p className={`text-sm font-medium ${isDark ? 'text-blue-400/80' : 'text-blue-600/80'} mb-3`}>{item.company}</p>
-                        <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'} mb-4 leading-relaxed`}>{item.description}</p>
-                        <ul className="space-y-2">
-                          {item.highlights.map((h, j) => (
-                            <li key={j} className={`flex items-start gap-2 text-sm ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
-                              <ChevronRight className={`w-4 h-4 mt-0.5 shrink-0 ${isDark ? 'text-blue-400' : 'text-blue-500'}`} aria-hidden="true" />
-                              {h}
-                            </li>
-                          ))}
-                        </ul>
-                      </article>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </LangTransition>
-            </div>
-          </motion.section>
-
-          {/* ═══════════════ PROJECTS ═══════════════ */}
-          <motion.section id="projects" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={containerVariants} className="space-y-10" aria-labelledby="proj-heading">
-            <h2 id="proj-heading" className="text-3xl sm:text-4xl font-bold text-center">💻 {sections.projects}</h2>
-            <LangTransition lang={lang}>
-              <motion.div
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="grid md:grid-cols-2 gap-6"
-              >
-                {projects.map((project, i) => (
-                  <motion.article key={i} variants={staggerItem} whileHover={{ y: -6 }}
-                    className={`p-6 sm:p-8 ${isDark ? 'bg-gradient-to-br from-white/[0.05] to-transparent border-white/10 hover:border-blue-500/40' : 'bg-white/70 border-white/30 hover:border-blue-300'} border rounded-[28px] transition-all group cursor-pointer flex flex-col print:border-slate-200 print:bg-white`}
-                  >
-                    <div className="flex items-start justify-between mb-4">
-                      <div className={`p-2.5 ${isDark ? 'bg-blue-500/10' : 'bg-blue-100'} rounded-xl`}><Code className={`w-5 h-5 ${isDark ? 'text-blue-400' : 'text-blue-600'}`} /></div>
-                      {project.status === 'production' && (
-                        <span className="flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-[10px] font-bold text-emerald-400 uppercase tracking-wider">
-                          <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" aria-hidden="true" />Live
-                        </span>
-                      )}
-                    </div>
-                    <h3 className={`text-lg font-bold ${isDark ? 'text-white group-hover:text-blue-400' : 'text-slate-800 group-hover:text-blue-600'} transition-colors mb-2`}>{project.title}</h3>
-                    <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'} leading-relaxed mb-4 flex-1`}>{project.description}</p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tech.map((t, j) => (
-                        <span key={j} className={`px-2.5 py-1 ${isDark ? 'bg-white/5 text-slate-300 border-white/5' : 'bg-slate-100 text-slate-600 border-slate-200'} border rounded-lg text-[11px] font-medium`}>{t}</span>
-                      ))}
-                    </div>
-                    <div className={`text-xs font-mono ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>{project.period}</div>
-                  </motion.article>
-                ))}
-              </motion.div>
-            </LangTransition>
-          </motion.section>
-
-          {/* ═══════════════ CERTIFICATIONS (HIDDEN FOR NOW) ═══════════════ */}
-          {/* <motion.section id="certifications" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={containerVariants} aria-labelledby="cert-heading">
-            <h2 id="cert-heading" className="text-3xl sm:text-4xl font-bold text-center mb-10">📜 {sections.certifications}</h2>
-            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-              <LangTransition lang={lang} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {certifications.map((cert, i) => (
-                  <motion.div key={i} variants={staggerItem} whileHover={{ y: -4, scale: 1.02 }}
-                    className={`p-5 ${isDark ? 'bg-white/[0.03] border-white/10 hover:border-cyan-500/30' : 'bg-white/60 border-white/30 hover:border-cyan-300'} border rounded-2xl text-center transition-all group`}
-                  >
-                    <div className="text-3xl mb-3">{cert.icon}</div>
-                    <h3 className={`text-sm font-bold ${isDark ? 'text-white' : 'text-slate-800'} mb-1`}>{cert.title}</h3>
-                    <p className={`text-xs ${isDark ? 'text-slate-500' : 'text-slate-400'} mb-2`}>{cert.issuer}</p>
-                    <span className={`inline-block px-2.5 py-0.5 ${isDark ? 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' : 'bg-cyan-100 text-cyan-700 border-cyan-200'} border rounded-full text-[10px] font-bold`}>{cert.year}</span>
-                  </motion.div>
-                ))}
-              </LangTransition>
-            </motion.div>
-          </motion.section> */}
-
-          {/* ═══════════════ AWARDS ═══════════════ */}
-          <motion.section id="awards" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={containerVariants}
-            className={`p-8 lg:p-12 ${isDark ? 'bg-gradient-to-r from-amber-600/5 via-yellow-600/10 to-amber-600/5 border-white/10' : 'bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50 border-amber-200/50'} border rounded-[40px] print:border-slate-200 print:bg-white`}
-            aria-labelledby="awards-heading"
-          >
-            <h2 id="awards-heading" className="text-3xl sm:text-4xl font-bold text-center mb-12">🏆 {sections.awards}</h2>
-            <LangTransition lang={lang}>
-              <motion.div
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto"
-              >
-                {awards.map((award, i) => (
-                  <motion.div key={i} variants={staggerItem} whileHover={{ scale: 1.03, y: -4 }}
-                    className={`p-6 ${isDark ? 'bg-white/[0.03] border-white/10' : 'bg-white/70 border-amber-200/30'} border rounded-3xl text-center group transition-all`}
-                  >
-                    <motion.div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-2xl flex items-center justify-center mb-4 mx-auto shadow-lg shadow-amber-500/20 group-hover:shadow-amber-500/40 transition-shadow"
-                      whileHover={{ rotate: [0, -10, 10, 0] }} transition={{ duration: 0.5 }}>
-                      <Trophy className="w-8 h-8 text-white" />
-                    </motion.div>
-                    <h3 className={`text-lg font-bold ${isDark ? 'text-white' : 'text-slate-800'} mb-2`}>{award.title}</h3>
-                    <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'} mb-3 leading-relaxed`}>{award.description}</p>
-                    <span className={`inline-block px-3 py-1 ${isDark ? 'bg-white/5 border-white/10 text-amber-400' : 'bg-amber-100/50 border-amber-200 text-amber-600'} border rounded-full text-xs font-mono`}>{award.year}</span>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </LangTransition>
-          </motion.section>
-
-          {/* ═══════════════ TESTIMONIALS ═══════════════ */}
-          <motion.section id="testimonials" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={containerVariants} className="space-y-10" aria-labelledby="test-heading">
-            <h2 id="test-heading" className="text-3xl sm:text-4xl font-bold text-center">💬 {sections.testimonials}</h2>
-            <LangTransition lang={lang}>
-              <motion.div
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="grid md:grid-cols-2 gap-6"
-              >
-                {testimonials.map((t, i) => (
-                  <motion.blockquote key={i} variants={staggerItem}
-                    className={`p-6 sm:p-8 ${isDark ? 'bg-white/[0.03] border-white/10' : 'bg-white/60 border-white/30'} border rounded-3xl relative group`}
-                  >
-                    <Quote className={`w-8 h-8 ${isDark ? 'text-blue-500/20' : 'text-blue-400/20'} absolute top-6 right-6`} aria-hidden="true" />
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-xl shadow-lg">{t.avatar}</div>
-                      <div>
-                        <div className={`font-bold ${isDark ? 'text-white' : 'text-slate-800'}`}>{t.name}</div>
-                        <div className={`text-xs ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>{t.role}</div>
-                      </div>
-                    </div>
-                    <p className={`${isDark ? 'text-slate-300' : 'text-slate-600'} leading-relaxed text-sm italic`}>"{t.text}"</p>
-                  </motion.blockquote>
-                ))}
-              </motion.div>
-            </LangTransition>
-          </motion.section>
-
-          {/* ═══════════════ BLOG / ARTICLES ═══════════════ */}
-          <motion.section id="blog" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={containerVariants} className="space-y-10" aria-labelledby="blog-heading">
-            <h2 id="blog-heading" className="text-3xl sm:text-4xl font-bold text-center">📝 {sections.blog}</h2>
-            <LangTransition lang={lang}>
-              <motion.div
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="grid md:grid-cols-3 gap-6"
-              >
-                {blog.map((post, i) => (
-                  <motion.article key={i} variants={staggerItem} whileHover={{ y: -6 }}
-                    className={`p-6 ${isDark ? 'bg-white/[0.03] border-white/10 hover:border-indigo-500/30' : 'bg-white/60 border-white/30 hover:border-indigo-300'} border rounded-3xl transition-all group cursor-pointer flex flex-col`}
-                  >
-                    <div className="flex items-center gap-2 mb-4">
-                      <span className={`px-2.5 py-1 ${isDark ? 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20' : 'bg-indigo-100 text-indigo-700 border-indigo-200'} border rounded-full text-[10px] font-bold uppercase tracking-wider`}>{post.tag}</span>
-                      <span className={`text-xs ${isDark ? 'text-slate-600' : 'text-slate-400'} font-mono`}>{post.date}</span>
-                    </div>
-                    <h3 className={`text-base font-bold ${isDark ? 'text-white group-hover:text-indigo-400' : 'text-slate-800 group-hover:text-indigo-600'} transition-colors mb-2`}>{post.title}</h3>
-                    <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'} leading-relaxed flex-1`}>{post.excerpt}</p>
-                    <div className={`mt-4 flex items-center gap-1 text-xs font-medium ${isDark ? 'text-blue-400' : 'text-blue-600'} group-hover:gap-2 transition-all`}>
-                    </div>
-                  </motion.article>
-                ))}
-              </motion.div>
-            </LangTransition>
-          </motion.section>
-
-          {/* ═══════════════ GITHUB HEATMAP ═══════════════ */}
           <GitHubHeatmap isDark={isDark} lang={lang} />
+      <FloatingNav isDark={isDark} lang={lang} />
 
-          {/* ═══════════════ FOOTER ═══════════════ */}
-          <footer className={`py-16 ${isDark ? 'border-white/5' : 'border-slate-200'} border-t print:py-8`} role="contentinfo">
-            <div className="text-center space-y-8">
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                <h3 className={`text-2xl sm:text-3xl font-bold mb-3 ${isDark ? 'text-white' : 'text-slate-800'}`}>
-                  {lang === 'th' ? 'มาร่วมงานกันเถอะ' : "Let's Work Together"}
-                </h3>
-                <p className={`${isDark ? 'text-slate-400' : 'text-slate-500'} max-w-md mx-auto text-sm`}>
-                  {lang === 'th' ? 'สนใจร่วมงานหรือมีโปรเจกต์? ติดต่อผมได้เลย' : "Interested in collaborating or have a project in mind? Let's connect!"}
-                </p>
-              </motion.div>
-              <div className="flex justify-center gap-3 print:hidden">
-                <a href={`mailto:${personalInfo.email}`}
-                  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white rounded-2xl font-bold text-sm transition-all shadow-lg shadow-blue-500/20 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                >
-                  <Mail className="w-4 h-4" /> {lang === 'th' ? 'ส่งอีเมล' : 'Send Email'}
-                </a>
-              </div>
-              <nav className="flex justify-center gap-4 print:hidden" aria-label="Footer social links">
-                {[
-                  { icon: Github, url: socialLinks.github, label: "GitHub" },
-                  { icon: Linkedin, url: socialLinks.linkedin, label: "LinkedIn" },
-                  { icon: Instagram, url: socialLinks.instagram, label: "Instagram" },
-                  { icon: Facebook, url: socialLinks.facebook, label: "Facebook" }
-                ].map((social, i) => (
-                  <a key={i} href={social.url} target="_blank" rel="noopener noreferrer"
-                    className={`p-2.5 ${isDark ? 'text-slate-500 hover:text-white' : 'text-slate-400 hover:text-slate-700'} transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-full`}
-                    aria-label={social.label}
-                  >
-                    <social.icon className="w-5 h-5" />
-                  </a>
-                ))}
-              </nav>
-              <div className={`text-xs ${isDark ? 'text-slate-600' : 'text-slate-400'} font-mono uppercase tracking-widest pt-4`}>
-                &copy; {new Date().getFullYear()} Woravut Dairoop &bull; Engineered with passion
-              </div>
-            </div>
-          </footer>
-
+          <Footer 
+            lang={lang} 
+            isDark={isDark} 
+            personalInfo={personalInfo} 
+            socialLinks={socialLinks} 
+          />
         </div>
       </div>
 
