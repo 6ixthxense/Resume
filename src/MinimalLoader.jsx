@@ -27,10 +27,24 @@ export default function MinimalLoader({ onFinish }) {
     }, [onFinish]);
 
     useEffect(() => {
-        const timers = BOOT_SEQUENCE.map((item, index) => {
+        const totalDuration = 2500;
+        const interval = 20;
+        const step = 100 / (totalDuration / interval);
+
+        const progressTimer = setInterval(() => {
+            setProgress(prev => {
+                const next = prev + step;
+                if (next >= 100) {
+                    clearInterval(progressTimer);
+                    return 100;
+                }
+                return next;
+            });
+        }, interval);
+
+        const textTimers = BOOT_SEQUENCE.map((item, index) => {
             return setTimeout(() => {
                 setVisibleLines(prev => [...prev, item.text]);
-                setProgress(Math.floor(((index + 1) / BOOT_SEQUENCE.length) * 100));
                 
                 if (index === BOOT_SEQUENCE.length - 1) {
                     setTimeout(onFinish, 900); // Hold for almost a second on 100% so they can read it
@@ -38,7 +52,10 @@ export default function MinimalLoader({ onFinish }) {
             }, item.delay);
         });
 
-        return () => timers.forEach(clearTimeout);
+        return () => {
+            clearInterval(progressTimer);
+            textTimers.forEach(clearTimeout);
+        };
     }, [onFinish]);
 
     return (
@@ -96,14 +113,14 @@ export default function MinimalLoader({ onFinish }) {
                 <div className="px-6 pb-6 pt-2">
                     <div className="flex justify-between text-xs text-slate-500 mb-2 font-bold tracking-widest uppercase">
                         <span>system_boot_progress</span>
-                        <span className="text-emerald-500">{progress}%</span>
+                        <span className="text-emerald-500">{Math.round(progress)}%</span>
                     </div>
                     <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
                         <motion.div
                             className="h-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]"
                             initial={{ width: 0 }}
                             animate={{ width: `${progress}%` }}
-                            transition={{ duration: 0.2 }}
+                            transition={{ duration: 0.1, ease: 'linear' }}
                         />
                     </div>
                 </div>
