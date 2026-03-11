@@ -64,46 +64,46 @@ export default function ChatBot({ lang = 'en', isDark = true }) {
         const getResponse = () => {
             if (lang === 'th') {
                 if (text.includes("ทักษะ") || text.includes("เก่ง") || text.includes("ถนัด")) {
-                    return `วรวุฒิเชี่ยวชาญด้าน Data Science และการพัฒนาซอฟต์แวร์ ทักษะเด่นคือ Python, Power BI และ JavaScript ครับ นอกจากนี้เขายังมีพื้นฐานด้าน SQL และการทำ Data Visualization ที่แข็งแกร่งด้วย`;
+                    return `วรวุฒิเชี่ยวชาญด้าน Fullstack Development และ Data Science ทักษะหลักคือ React, Node.js, MySQL, Python และ Power BI นอกเหนือจากนี้ยังสามารถออกแบบ Database Schema และจัดการ API ได้อย่างเป็นระบบครับ`;
                 }
                 if (text.includes("ประสบการณ์") || text.includes("ทำงาน")) {
-                    return `เขามีประสบการณ์หลากหลาย ตั้งแต่การเป็นผู้นำนักศึกษาไปจนถึงงานด้านเทคนิค ปัจจุบันทำงานที่ Bigmall Plus ในตำแหน่ง Fullstack Developer & IT Support & Data Analyst ครับ`;
+                    return `เขามีประสบการณ์ระดับ Production จริง! ปัจจุบันเป็น Full-Stack Developer ที่ Bigmall Plus ดูแลทั้งการพัฒนาระบบ WMS ภายใน การจัดการโค้ดขึ้น Linux Server ตลอดจนทำ Dashboards วิเคราะห์ข้อมูลครับ`;
                 }
                 if (text.includes("โปรเจกต์") || text.includes("ผลงาน")) {
-                    return `โปรเจกต์ล่าสุดที่น่าสนใจคือ ระบบ WMS (Warehouse Management System), โมเดลทำนายโรคมะเร็งปอด และการใช้ Deep Learning ทำนายผลฟุตบอลครับ`;
+                    return `โปรเจกต์เด่นๆ ได้แก่ ระบบจัดการคลังสินค้า WMS (ที่พัฒนาขึ้นใช้จริง), ระบบ Department CMS ที่ออกแบบโครงสร้างฐานข้อมูลไปกว่า 13 Tables, และระบบ NLP ทำนายกวีนิพนธ์สุนทรภู่ครับ`;
                 }
                 if (text.includes("ติดต่อ") || text.includes("เบอร์") || text.includes("อีเมล")) {
-                    return `คุณสามารถติดต่อวรวุฒิได้ที่อีเมล ${data.personalInfo.email} หรือโทร ${data.personalInfo.phone} ครับ`;
+                    return `สามารถติดต่อวรวุฒิได้ที่อีเมล ${data.personalInfo.email} หรือโทร ${data.personalInfo.phone} รวมถึงหน้า GitHub ได้เลยครับ`;
                 }
                 if (text.includes("ตำแหน่ง") || text.includes("ปัจจุบัน")) {
-                    return `ปัจจุบันเขาทำงานเป็น Fullstack Developer & Data Analyst ที่ Bigmall Plus ดูแลทั้งระบบหน้าบ้าน หลังบ้าน และการวิเคราะห์ข้อมูลเพื่อธุรกิจครับ`;
+                    return `ตำแหน่งล่าสุดคือ Full-Stack Developer ที่ Bigmall Plus ครับ ผลงานจะเป็นการรวมกันของ Web Development, Database Architecture, และการทำ Data Analytics`;
                 }
                 if (text.includes("เรียน") || text.includes("การศึกษา")) {
                     const edu = data.education[0];
-                    return `เขาจบการศึกษา ${edu.degree} จาก ${edu.institution} (${edu.period}) ครับ`;
+                    return `จบชั้นระดับ ${edu.degree} จาก ${edu.institution} (${edu.period}) ครับ`;
                 }
-                return `เป็นคำถามที่น่าสนใจครับ! วรวุฒิมีความหลงใหลในเทคโนโลยีและการแก้ปัญหาด้วยข้อมูล อยากให้ผมเล่ารายละเอียดส่วนไหนเพิ่มไหมครับ?`;
+                return `เป็นคำถามที่น่าสนใจครับ วรวุฒิถนัดเรื่องการสร้าง Web App เต็มรูปแบบและการทำระบบซัพพอร์ต Data อยากให้เล่าเจาะไปที่ประสบการณ์ชิ้นไหนไหมครับ?`;
             } else {
                 if (text.includes("skill") || text.includes("competenc")) {
-                    return `Woravut excels in Data Science and Fullstack Development. His primary tech stack includes Python, JavaScript (React/Node.js), SQL, and Power BI for data analytics.`;
+                    return `Woravut is highly skilled in both Full-Stack Development and Data Science. His core stack includes React, Node.js, MySQL, Python, and Power BI. He is also experienced in designing 13+ table database schemas and structuring REST APIs.`;
                 }
                 if (text.includes("experience") || text.includes("work")) {
-                    return `He has a unique blend of leadership and technical expertise. Currently, he serves as a Fullstack Developer & Data Analyst at Bigmall Plus, managing complex systems and data pipelines.`;
+                    return `He brings real production-level experience! Currently, he is a Full-Stack Developer at Bigmall Plus, building internal WMS applications, deploying code to Linux servers, and creating operational analytics dashboards.`;
                 }
                 if (text.includes("project") || text.includes("portfolio")) {
-                    return `Some of his key projects include a custom Warehouse Management System (WMS), a lung cancer prediction model, and advanced football outcome predictors using Deep Learning.`;
+                    return `His standout projects include a production Warehouse Management System (WMS), a Full-Stack Department CMS with over 13 tables and 20+ admin pages, and a Deep Learning NLP pipeline for classical poetry.`;
                 }
                 if (text.includes("contact") || text.includes("email") || text.includes("phone")) {
-                    return `Feel free to reach out to him via email at ${data.personalInfo.email} or call him directly at ${data.personalInfo.phone}.`;
+                    return `You can reach him at ${data.personalInfo.email} or by phone at ${data.personalInfo.phone}. His GitHub is also linked here!`;
                 }
                 if (text.includes("role") || text.includes("current")) {
-                    return `He is currently working as a Fullstack Developer & Data Analyst at Bigmall Plus, where he integrates business logic with data-driven insights.`;
+                    return `His current role is Full-Stack Developer at Bigmall Plus, where his work bridges web application development, database architecture, and data analytics.`;
                 }
                 if (text.includes("study") || text.includes("education") || text.includes("university")) {
                     const edu = data.education[0];
-                    return `He holds a ${edu.degree} from ${edu.institution}, completed during ${edu.period}.`;
+                    return `He completed his ${edu.degree} from ${edu.institution} (${edu.period}).`;
                 }
-                return `That's a great question! Woravut is dedicated to continuous learning and building impactful tech solutions. Would you like to know more about his projects or technical background?`;
+                return `That's a great question! Woravut specializes in building complete web applications and supporting data systems. Which of his projects or experiences would you like to hear more about?`;
             }
         };
 
@@ -274,7 +274,7 @@ export default function ChatBot({ lang = 'en', isDark = true }) {
                     <>
                         <span className="absolute -top-1 -right-1 flex h-5 w-5">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-5 w-5 bg-pink-500 border-2 border-slate-900 flex items-center justify-center text-[10px] font-bold">1</span>
+                            <span className="relative inline-flex rounded-full h-5 w-5 bg-pink-500 border-2 border-slate-900 justify-center items-center text-[10px] font-bold">1</span>
                         </span>
                         <div className="absolute -left-20 top-1/2 -translate-y-1/2 px-3 py-1.5 bg-white text-slate-900 rounded-lg text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-xl border border-slate-200">
                             Chat with me!

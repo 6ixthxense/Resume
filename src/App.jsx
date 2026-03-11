@@ -4,7 +4,6 @@ import MinimalLoader from './MinimalLoader';
 import ParticleBackground from './ParticleBackground';
 import CursorTrail from './CursorTrail';
 import ResumePage from './ResumePage';
-import CommandPalette from './CommandPalette';
 import ChatBot from './ChatBot';
 
 export default function App() {
@@ -40,7 +39,6 @@ export default function App() {
             </div>
 
             {/* Global Components */}
-            <CommandPalette lang={lang} />
             <ChatBot lang={lang} isDark={isDark} />
           </motion.div>
         )}

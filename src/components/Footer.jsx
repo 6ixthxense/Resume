@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Github, Linkedin, Instagram, Facebook } from 'lucide-react';
 
-export default function Footer({ lang, isDark, personalInfo, socialLinks }) {
+const Footer = function({ lang, isDark, personalInfo, socialLinks }) {
   return (
     <footer className={`py-16 ${isDark ? 'border-white/5' : 'border-slate-200'} border-t print:py-8`} role="contentinfo">
       <div className="text-center space-y-8">
@@ -43,3 +43,5 @@ export default function Footer({ lang, isDark, personalInfo, socialLinks }) {
     </footer>
   );
 }
+
+export default React.memo(Footer);

@@ -2,7 +2,7 @@ export const resumeData = {
   en: {
     personalInfo: {
       name: "Woravut Dairoop",
-      roles: ["Data Analyst", 1500, "IT Support", 1500, "Fullstack Developer", 1500],
+      roles: ["Full-Stack Developer"],
       company: "Bigmall Plus",
       email: "woravutdairoop.work@gmail.com",
       phone: "+66 62 610 0297",
@@ -15,155 +15,108 @@ export const resumeData = {
       { label: "Awards Won", value: 2, suffix: "" },
       { label: "Technologies", value: 8, suffix: "+" },
     ],
-    professionalSummary: "\tHighly motivated and detail-oriented Data Analyst with a strong academic foundation in Data Science and proven experience in full-stack web application development using the MERN/MEVN Stack (specifically React and Node.js) for critical business systems.\n\tCurrently serving a multifaceted role at Bigmall Plus, encompassing IT Support and Data Analysis.\n\tKey contributions include the successful development, deployment, and maintenance of a proprietary Warehouse Management System (WMS) Web Application built with React (Frontend) and Node.js (Backend) that is currently in production use.\n\tSkilled in Python, R, Power BI, Excel, and SQL with extensive experience in data analytics, dashboard creation, and system support.\n\tDemonstrated leadership as President of the Faculty of Science Student Union.",
+    professionalSummary: "Full-stack developer with a background in Data Science and experience building production web systems.\nDeveloped internal applications including a Warehouse Management System (WMS) and analytics dashboards at Bigmall Plus.\nSkilled in React, Node.js, SQL, and API development with experience designing databases and deploying applications to Linux servers.",
     education: [
       {
         degree: "Bachelor of Science in Data Science",
         institution: "Silpakorn University",
         period: "2020 - 2025"
-      },
-      {
-        degree: "Fullstack Developer & IT support & Data Analyst",
-        institution: "Bigmall Plus",
-        period: "6/2025 - Present"
       }
     ],
     experience: [
       {
-        title: "Fullstack Developer & IT Support & Data Analyst",
+        title: "Full-Stack Developer / IT Support",
         company: "Bigmall Plus",
         period: "Jun 2025 – Present",
-        description: "Multi-role position encompassing full-stack development, IT infrastructure support, and business data analytics.",
+        techStack: "Tech: Next.js, React, Prisma, SQLite, Tailwind CSS, Power BI",
+        description: "Multi-role position encompassing full-stack web development, and business data analytics.",
         highlights: [
-          "Developed & deployed production Warehouse Management System (WMS) using React + Node.js",
-          "Created interactive dashboards using Power BI for executive decision-making",
-          "Managed IT support operations including hardware, networking, and system maintenance"
+          "Developed and deployed a production Internal ERP & WMS Portal used for daily corporate and warehouse operations",
+          "Designed database schema with 20 relational tables encompassing HR, payroll, equipment tracking, and claims",
+          "Implemented secure Next.js Server Actions supporting 11 distinct administrative modules",
+          "Collaborated with corporate staff to translate operational workflows into system features",
+          "Deployed Next.js application to Linux server with PM2",
+          "Configured SSL and reverse proxy using Nginx",
+          "Created Power BI dashboards for operational analytics",
+          "Managed internal IT systems including hardware, networking, and system support"
         ]
       },
       {
         title: "Student Union Advisor",
         company: "Faculty of Science, Silpakorn University",
         period: "2024",
-        description: "Mentored the succeeding student council, providing strategic guidance and institutional knowledge transfer.",
+        techStack: "Leadership & Coaching",
+        description: "Mentored the succeeding student council, providing strategic guidance.",
         highlights: [
           "Advised on event planning and budget management",
           "Facilitated smooth leadership transition between terms"
         ]
       },
       {
-        title: "President of Student Union",
-        company: "Faculty of Science, Silpakorn University",
+        title: "President",
+        company: "Student Union, Faculty of Science, Silpakorn University",
         period: "2023",
-        description: "Led the Faculty of Science Student Union, managing a team and organizing university-wide events.",
+        techStack: "Management & Planning",
+        description: "Led student organization operations and coordinated university events.",
         highlights: [
-          "Received Outstanding Activity Award for exceptional leadership",
-          "Organized 10+ major events including orientation and science festivals",
-          "Managed annual budget and coordinated with university administration"
-        ]
-      },
-      {
-        title: "Head of Recreation",
-        company: "Faculty of Science, Silpakorn University",
-        period: "2021 – 2022",
-        description: "Directed all recreational and extracurricular activities for the faculty student body across two consecutive terms.",
-        highlights: [
-          "Planned and executed recreational events for 500+ students",
-          "Managed recreation committee and volunteer coordination"
+          "Managed event planning and budgeting for multiple faculty activities"
         ]
       }
     ],
     projects: [
       {
-        title: "Bigmall Plus WMS",
-        description: "Production warehouse management system handling inventory tracking, order processing, and real-time stock monitoring for the entire supply chain.",
-        tech: ["React", "Node.js", "MySQL"],
+        title: "Academic Department CMS",
+        impact: "Full-stack content management system for managing department website content.",
+        techStack: "Tech: Next.js, Prisma, SQLite",
+        tech: ["Next.js", "Prisma", "SQLite"],
+        period: " Mar 2026 - Present",
+        status: "development",
+        highlights: [
+          "Built a full-stack CMS for managing department website content including news, staff profiles, and research publications",
+          "Designed relational database schema with 13 tables using Prisma ORM",
+          "Developed 20+ admin pages and 15+ REST API endpoints",
+          "Implemented authentication, audit logging, and rich text editing"
+        ]
+      },
+      {
+        title: "Bigmall Plus ERP & WMS",
+        impact: "Internal system used by warehouse and corporate staff for daily operations.",
+        techStack: "Tech: Next.js, React, Prisma, Tailwind CSS",
+        tech: ["Next.js", "React", "Prisma", "Tailwind CSS"],
         period: "Jul 2025 – Present",
-        status: "production"
+        status: "production",
+        highlights: [
+          "Built a full-stack Internal ERP portal encompassing Warehouse Claims, HR Management, Payroll, and Equipment Tracking",
+          "Developed 11 distinct corporate modules with role-based access control and real-time activity dashboards",
+          "Created operational dashboards using Power BI to visualize supply chain metrics"
+        ]
       },
       {
-        title: "Sunthorn Phu's Poetry NLP",
-        description: "NLP pipeline for processing classical Thai poetry — corpus construction, tokenization, and automatic poem generation using deep learning.",
-        tech: ["Python", "NLP", "Deep Learning", "TensorFlow"],
+        title: "NLP Poetry Generator",
+        impact: "Natural language processing pipeline for classical Thai poetry.",
+        techStack: "Tech: Python, Deep Learning, TensorFlow",
+        tech: ["Python", "NLP", "TensorFlow"],
         period: "Nov 2024 – Mar 2025",
-        status: "completed"
-      },
-      {
-        title: "Football Match Predictor",
-        description: "Comparative study evaluating Machine Learning vs Deep Learning models for predicting Premier League match outcomes with feature engineering.",
-        tech: ["Python", "Scikit-learn", "TensorFlow", "Pandas"],
-        period: "Jan 2025 – Mar 2025",
-        status: "completed"
-      },
-      {
-        title: "Lung Cancer Prediction",
-        description: "Predictive analytics project analyzing behavioral and environmental factors contributing to lung cancer risk using statistical and ML methods.",
-        tech: ["Python", "R", "Statistical Analysis", "ML"],
-        period: "Nov 2022 – Mar 2023",
-        status: "completed"
-      }
-    ],
-    awards: [
-      { title: "Outstanding Activity Award", year: "2023", description: "Recognized for exceptional leadership and contributions as President of the Student Union." },
-      { title: "Outstanding Activity Award", year: "2024", description: "Honored for continued mentorship and impactful advisory role to the student council." }
-    ],
-    testimonials: [
-      {
-        name: "Faculty Advisor",
-        role: "Faculty of Science, Silpakorn University",
-        text: "Woravut demonstrated exceptional leadership during his tenure as Student Union President. His ability to coordinate large-scale events and manage diverse teams is truly remarkable.",
-        avatar: "🎓"
-      },
-      {
-        name: "Team Colleague",
-        role: "Bigmall Plus",
-        text: "Mickey's technical skills combined with his analytical mindset make him an invaluable team member. The WMS system he built single-handedly transformed our warehouse operations.",
-        avatar: "💼"
-      }
-    ],
-    certifications: [
-      { title: "Data Science Foundations", issuer: "Silpakorn University", year: "2024", icon: "📊" },
-      { title: "React & Node.js Development", issuer: "Self-taught / Project-based", year: "2025", icon: "⚛️" },
-      { title: "Power BI Data Visualization", issuer: "Microsoft Learn", year: "2025", icon: "📈" },
-      { title: "Python for Data Analysis", issuer: "Academic Coursework", year: "2023", icon: "🐍" }
-    ],
-    blog: [
-      {
-        title: "Building a Production WMS with React",
-        excerpt: "Lessons learned from building and deploying a full warehouse management system as a solo developer.",
-        date: "2025",
-        tag: "Engineering"
-      },
-      {
-        title: "ML vs DL for Football Predictions",
-        excerpt: "A comparative analysis of machine learning approaches for predicting Premier League match outcomes.",
-        date: "2025",
-        tag: "Data Science"
-      },
-      {
-        title: "NLP on Classical Thai Poetry",
-        excerpt: "How I processed Sunthorn Phu's poetry to build a corpus and generate poems automatically.",
-        date: "2024",
-        tag: "NLP"
+        status: "completed",
+        highlights: [
+          "Developed NLP pipeline for processing Sunthorn Phu's classical poetry",
+          "Built corpus construction, tokenization, and deep learning models for generation"
+        ]
       }
     ],
     sections: {
-      summary: "Professional Summary",
-      education: "Education & Career",
-      analytics: "Technical Analytics & Proficiency",
-      experience: "Professional Journey",
-      projects: "Featured Projects",
-      awards: "Honors & Recognition",
-      testimonials: "What People Say",
-      certifications: "Certifications & Learning",
-      blog: "Insights & Articles",
-      github: "GitHub Activity",
-      contact: "Get in touch"
+      summary: "PROFESSIONAL SUMMARY",
+      education: "EDUCATION",
+      analytics: "SKILLS",
+      experience: "EXPERIENCE",
+      projects: "PROJECTS",
+      contact: "CONTACT"
     }
   },
   th: {
     personalInfo: {
       name: "นายวรวุฒิ ได้รูป",
-      roles: ["นักวิเคราะห์ข้อมูล", 1500, "ฝ่ายซัพพอร์ตไอที", 1500, "นักพัฒนา Fullstack", 1500],
+      roles: ["นักพัฒนา Full-Stack"],
       company: "Bigmall Plus",
       email: "woravutdairoop.work@gmail.com",
       phone: "+66 62 610 0297",
@@ -176,207 +129,142 @@ export const resumeData = {
       { label: "รางวัลที่ได้รับ", value: 2, suffix: "" },
       { label: "เทคโนโลยี", value: 8, suffix: "+" },
     ],
-    professionalSummary: "\tนักวิเคราะห์ข้อมูลที่มีความกระตือรือล้นและใส่ใจในรายละเอียด พร้อมพื้นฐานทางวิชาการที่แข็งแกร่งในด้านวิทยาศาสตร์ข้อมูล และมีประสบการณ์ที่ได้รับการพิสูจน์แล้วในการพัฒนาเว็บแอปพลิเคชันแบบ Full-stack โดยใช้ MERN/MEVN Stack (โดยเฉพาะ React และ Node.js) สำหรับระบบธุรกิจที่สำคัญ\n\tปัจจุบันดำรงตำแหน่งที่มีบทบาทหลากหลายที่ Bigmall Plus ครอบคลุมทั้งงานด้านไอทีซัพพอร์ตและการวิเคราะห์ข้อมูล\n\tผลงานสำคัญ ได้แก่ การพัฒนา การติดตั้ง และการดูแลรักษาเว็บแอปพลิเคชันระบบบริหารจัดการคลังสินค้า (WMS) ที่สร้างด้วย React (Frontend) และ Node.js (Backend) ซึ่งปัจจุบันมีการใช้งานจริงในกระบวนการผลิต\n\tมีความเชี่ยวชาญในภาษา Python, R, Power BI, Excel และ SQL พร้อมประสบการณ์กว้างขวางในการวิเคราะห์ข้อมูล การสร้างแดชบอร์ด และการสนับสนุนระบบ\n\tมีภาวะผู้นำที่โดดเด่นจากการดำรงตำแหน่งประธานสโมสรนักศึกษาคณะวิทยาศาสตร์",
+    professionalSummary: "นักพัฒนา Full-stack ที่มีพื้นฐานจากการเรียน Data Science และมีประสบการณ์ในการสร้างระบบ Web Application ที่ใช้งานจริงระดับ Production\nปัจจุบันรับผิดชอบการสร้างแอปพลิเคชันสำหรับใช้งานในองค์กร รวมถึงระบบบริหารจัดการคลังสินค้า (WMS) และ Analytics Dashboard ที่ Bigmall Plus\nมีความเชี่ยวชาญใน React, Node.js, SQL, และการทำ API ตลอดจนสามารถออกแบบ Database Schema และ Deploy แอปพลิเคชันลงบน Linux Server ด้วยความเข้าใจรอบด้าน",
     education: [
       {
         degree: "วิทยาศาสตรบัณฑิต สาขาวิทยาศาสตร์ข้อมูล",
         institution: "มหาวิทยาลัยศิลปากร",
         period: "2563 - 2568"
-      },
-      {
-        degree: "Fullstack Developer & IT support & Data Analyst",
-        institution: "บริษัทบิ๊กมอลล์ พลัส",
-        period: "มิถุนายน 2568 - ปัจจุบัน"
       }
     ],
     experience: [
       {
-        title: "Fullstack Developer & IT Support & นักวิเคราะห์ข้อมูล",
+        title: "Full-Stack Developer / IT Support",
         company: "บริษัทบิ๊กมอลล์ พลัส",
         period: "มิ.ย. 2568 – ปัจจุบัน",
-        description: "ตำแหน่งที่ครอบคลุมหลายบทบาททั้งการพัฒนา Full-stack, สนับสนุนโครงสร้างพื้นฐาน IT และวิเคราะห์ข้อมูลทางธุรกิจ",
+        techStack: "Tech: Next.js, React, Prisma, SQLite, Tailwind CSS, Power BI",
+        description: "รับผิดชอบทั้งการพัฒนา Full-stack, วิเคราะห์ข้อมูลทางธุรกิจ และสนับสนุนโครงสร้างพื้นฐาน IT",
         highlights: [
-          "พัฒนาและติดตั้งระบบ WMS ที่ใช้งานจริง โดยใช้ React + Node.js",
-          "สร้างแดชบอร์ดแบบ Interactive ด้วย Power BI สำหรับการตัดสินใจระดับผู้บริหาร",
-          "ดูแลการดำเนินงาน IT Support รวมถึงฮาร์ดแวร์ เครือข่าย และการบำรุงรักษาระบบ"
+          "พัฒนาและ Deploy ระบบ Internal ERP & WMS ที่ทีมงานใช้ในกระบวนการทำงานทุกวัน",
+          "ออกแบบ Database Schema จำนวน 20 Tables สำหรับจัดการ HR, เงินเดือน, ทรัพย์สินองค์กร และคลังสินค้า",
+          "สร้าง Next.js Server Actions เพื่อรองรับการทำงานของ 11 ระบบย่อยภายในองค์กร",
+          "ทำงานร่วมกับบุคลากรหน้างานเพื่อแปลกระบวนการทำงานและสิ่งที่ต้องการให้กลายเป็นฟีเจอร์ของระบบ",
+          "Deploy Next.js Application ลงบน Linux Server ด้วย PM2",
+          "ปรับแต่งและตั้งค่า SSL Certificates และ Reverse Proxy โดยใช้งาน Nginx",
+          "สร้าง Interactive Dashboard ด้วย Power BI สำหรับวิเคราะห์ระดับปฏิบัติการ",
+          "ดูแลรักษาระบบคอมพิวเตอร์และเครือข่ายสำหรับบุคลากรภายในองค์กร"
         ]
       },
       {
         title: "ที่ปรึกษาสโมสรนักศึกษา",
         company: "คณะวิทยาศาสตร์ มหาวิทยาลัยศิลปากร",
         period: "2567",
-        description: "ให้คำปรึกษาแก่สโมสรนักศึกษาชุดถัดไป โดยให้คำแนะนำเชิงกลยุทธ์และถ่ายทอดความรู้ขององค์กร",
+        techStack: "Leadership & Coaching",
+        description: "ให้คำปรึกษาแก่สโมสรนักศึกษาชุดถัดไปในเชิญบริหารจัดการองค์กร",
         highlights: [
-          "ให้คำปรึกษาด้านการวางแผนกิจกรรมและการจัดการงบประมาณ",
-          "อำนวยความสะดวกในการเปลี่ยนผ่านผู้นำอย่างราบรื่น"
+          "ให้คำปรึกษาด้านการวางแผนกิจกรรมและการจัดการงบประมาณหลัก",
+          "ช่วยดูแลกระบวนการเปลี่ยนผ่านและวางระบบการบริหารผู้นำรุ่นต่อไป"
         ]
       },
       {
         title: "นายกสโมสรนักศึกษา",
-        company: "คณะวิทยาศาสตร์ มหาวิทยาลัยศิลปากร",
+        company: "สโมสรนักศึกษา คณะวิทยาศาสตร์ มหาวิทยาลัยศิลปากร",
         period: "2566",
-        description: "นำทีมสโมสรนักศึกษาคณะวิทยาศาสตร์ บริหารทีมและจัดกิจกรรมระดับมหาวิทยาลัย",
+        techStack: "Management & Planning",
+        description: "บริหารจัดการสโมสรนักศึกษาและช่วยควบคุมการจัดกิจกรรมใหญ่ของคณะ",
         highlights: [
-          "ได้รับรางวัลพระจันทรเพชรสำหรับภาวะผู้นำที่โดดเด่น",
-          "จัดกิจกรรมหลัก 10+ งาน รวมถึงปฐมนิเทศและเทศกาลวิทยาศาสตร์",
-          "บริหารงบประมาณประจำปีและประสานงานกับฝ่ายบริหารมหาวิทยาลัย"
-        ]
-      },
-      {
-        title: "ประธานฝ่ายนันทนาการ",
-        company: "คณะวิทยาศาสตร์ มหาวิทยาลัยศิลปากร",
-        period: "2564 – 2565",
-        description: "ดูแลกิจกรรมนันทนาการและกิจกรรมนอกหลักสูตรทั้งหมดสำหรับนักศึกษาคณะ ต่อเนื่องสองวาระ",
-        highlights: [
-          "วางแผนและจัดกิจกรรมนันทนาการสำหรับนักศึกษา 500+ คน",
-          "จัดการคณะกรรมการนันทนาการและประสานงานอาสาสมัคร"
+          "บริหารงานและวางแผนงบประมาณสำหรับกิจกรรมนักศึกษาทั้งคณะ"
         ]
       }
     ],
     projects: [
       {
-        title: "Bigmall Plus WMS",
-        description: "ระบบบริหารจัดการคลังสินค้าที่ใช้งานจริง จัดการการติดตามสินค้าคงคลัง การประมวลผลคำสั่งซื้อ และการตรวจสอบสต็อกแบบเรียลไทม์",
-        tech: ["React", "Node.js", "MySQL"],
+        title: "Academic Department CMS",
+        impact: "ระบบบริหารเนื้อหา (CMS) แบบ Full-stack สำหรับจัดการเว็บไซต์ของภาควิชา",
+        techStack: "Tech: Next.js, Prisma, SQLite",
+        tech: ["Next.js", "Prisma", "SQLite"],
+        period: "2567",
+        status: "development",
+        highlights: [
+          "สร้าง CMS แบบ Full-stack ระบบใหญ่สำหรับจัดการข้อมูลหน้าเว็บ ข่าวสาร ประวัติอาจารย์ และงานวิจัย",
+          "ออกแบบ Relational Database Schema จาก 13 Tables พร้อมใช้ Prisma ORM เชื่อมต่อข้อมูล",
+          "พัฒนาระบบหลังบ้านมากกว่า 20+ หน้า และสร้าง 15+ REST API endpoints สำหรับเรียกใช้งาน",
+          "ติดตั้งระบบยืนยันตัวตน, Audit Logs สำหรับบันทึกประวัติการกระทำ และระบบ Rich Text Formatting"
+        ]
+      },
+      {
+        title: "Bigmall Plus ERP & WMS",
+        impact: "ระบบภายในที่ใช้งานจริงโดยทีมปฏิบัติการคลังสินค้าและบุคลากรองค์กรในกระบวนการทำงานทุกวัน",
+        techStack: "Tech: Next.js, React, Prisma, Tailwind CSS",
+        tech: ["Next.js", "React", "Prisma", "Tailwind CSS"],
         period: "ก.ค. 2568 – ปัจจุบัน",
-        status: "production"
+        status: "production",
+        highlights: [
+          "พัฒนาระบบ ERP แบบ Full-stack ครอบคลุมระบบคลังสินค้า ระบบบุคคลากร และระบบเงินเดือน",
+          "ออกแบบและพัฒนา 11 โมดูลการทำงาน พร้อมระบบ Role-based Access Control เชื่อมกับพนักงานจริง",
+          "เชื่อมต่อข้อมูลระบบการแสดงผลรายงานด้วย Power BI ในระดับการบริหารซัพพลายเชนรายเดือน"
+        ]
       },
       {
-        title: "NLP กวีนิพนธ์สุนทรภู่",
-        description: "ระบบประมวลผลภาษาธรรมชาติสำหรับกวีนิพนธ์ไทยคลาสสิก — สร้างคลังข้อมูล, ตัดคำ และสร้างบทกวีอัตโนมัติ",
-        tech: ["Python", "NLP", "Deep Learning", "TensorFlow"],
+        title: "NLP Poetry Generator",
+        impact: "ระบบ Pipeline ประมวลผลภาษาธรรมชาติ (NLP) สำหรับวิเคราะห์กวีนิพนธ์ไทยแบบคลาสสิก",
+        techStack: "Tech: Python, Deep Learning, TensorFlow",
+        tech: ["Python", "NLP", "TensorFlow"],
         period: "พ.ย. 2567 – มี.ค. 2568",
-        status: "completed"
-      },
-      {
-        title: "ทำนายผลฟุตบอล",
-        description: "การศึกษาเปรียบเทียบโมเดล ML และ DL สำหรับทำนายผลพรีเมียร์ลีกพร้อม Feature Engineering",
-        tech: ["Python", "Scikit-learn", "TensorFlow", "Pandas"],
-        period: "ม.ค. 2568 – มี.ค. 2568",
-        status: "completed"
-      },
-      {
-        title: "ทำนายมะเร็งปอด",
-        description: "โปรเจกต์วิเคราะห์เชิงพยากรณ์ ศึกษาปัจจัยพฤติกรรมและสิ่งแวดล้อมที่ส่งผลต่อความเสี่ยงมะเร็งปอด",
-        tech: ["Python", "R", "Statistical Analysis", "ML"],
-        period: "พ.ย. 2565 – มี.ค. 2566",
-        status: "completed"
-      }
-    ],
-    awards: [
-      { title: "รางวัลพระจันทรเพชร ระดับดีเด่น", year: "2566", description: "ได้รับการยกย่องสำหรับภาวะผู้นำที่โดดเด่นและการมีส่วนร่วมในฐานะนายกสโมสร" },
-      { title: "รางวัลพระจันทรเพชร ระดับดีเด่น", year: "2567", description: "ได้รับเกียรติสำหรับการเป็นที่ปรึกษาอย่างต่อเนื่องและบทบาทที่สร้างผลกระทบเชิงบวก" }
-    ],
-    testimonials: [
-      {
-        name: "อาจารย์ที่ปรึกษา",
-        role: "คณะวิทยาศาสตร์ มหาวิทยาลัยศิลปากร",
-        text: "วรวุฒิแสดงให้เห็นถึงภาวะผู้นำที่โดดเด่นในช่วงที่ดำรงตำแหน่งนายกสโมสรนักศึกษา ความสามารถในการประสานงานกิจกรรมขนาดใหญ่และบริหารทีมที่หลากหลายนั้นน่าทึ่งมาก",
-        avatar: "🎓"
-      },
-      {
-        name: "เพื่อนร่วมทีม",
-        role: "บริษัทบิ๊กมอลล์ พลัส",
-        text: "ทักษะทางเทคนิคของมิกกี้ผสมผสานกับความคิดเชิงวิเคราะห์ทำให้เขาเป็นสมาชิกทีมที่มีคุณค่าอย่างยิ่ง ระบบ WMS ที่เขาสร้างขึ้นคนเดียวได้เปลี่ยนแปลงการดำเนินงานคลังสินค้าของเรา",
-        avatar: "💼"
-      }
-    ],
-    certifications: [
-      { title: "พื้นฐานวิทยาศาสตร์ข้อมูล", issuer: "มหาวิทยาลัยศิลปากร", year: "2567", icon: "📊" },
-      { title: "การพัฒนา React & Node.js", issuer: "เรียนรู้ด้วยตนเอง / โปรเจกต์จริง", year: "2568", icon: "⚛️" },
-      { title: "Power BI Data Visualization", issuer: "Microsoft Learn", year: "2568", icon: "📈" },
-      { title: "Python สำหรับวิเคราะห์ข้อมูล", issuer: "หลักสูตรมหาวิทยาลัย", year: "2566", icon: "🐍" }
-    ],
-    blog: [
-      {
-        title: "การสร้างระบบ WMS ด้วย React",
-        excerpt: "บทเรียนจากการสร้างและ deploy ระบบบริหารคลังสินค้าเต็มรูปแบบในฐานะนักพัฒนาคนเดียว",
-        date: "2568",
-        tag: "Engineering"
-      },
-      {
-        title: "ML vs DL สำหรับทำนายผลฟุตบอล",
-        excerpt: "การวิเคราะห์เปรียบเทียบแนวทาง Machine Learning สำหรับทำนายผลพรีเมียร์ลีก",
-        date: "2568",
-        tag: "Data Science"
-      },
-      {
-        title: "NLP กับกวีนิพนธ์ไทยคลาสสิก",
-        excerpt: "วิธีที่ผมประมวลผลกวีนิพนธ์ของสุนทรภู่เพื่อสร้างคลังข้อมูลและสร้างบทกวีอัตโนมัติ",
-        date: "2567",
-        tag: "NLP"
+        status: "completed",
+        highlights: [
+          "พัฒนาระบบวิเคราะห์ภาษาสำหรับการถอดรหัสและประมวลผลกวีนิพนธ์ของสุนทรภู่",
+          "เขียนโปรแกรมสำหรับจัดทำ Corpus, ตัดคำ, และพัฒนา Deep Learning Model เพื่อสร้างบทกวีใหม่"
+        ]
       }
     ],
     sections: {
       summary: "บทสรุปวิชาชีพ",
-      education: "ประวัติการศึกษาและการทำงาน",
-      analytics: "การวิเคราะห์ทางเทคนิคและความเชี่ยวชาญ",
-      experience: "เส้นทางวิชาชีพ",
-      projects: "ผลงานที่คัดสรร",
-      awards: "รางวัลและความภาคภูมิใจ",
-      testimonials: "เสียงจากผู้ร่วมงาน",
-      certifications: "ใบรับรองและการเรียนรู้",
-      blog: "บทความและแนวคิด",
-      github: "กิจกรรม GitHub",
-      contact: "ติดต่อสอบถาม"
+      education: "ประวัติการศึกษา",
+      analytics: "ทักษะด้านเทคโนโลยี",
+      experience: "ประสบการณ์ทำงานจริง",
+      projects: "โปรเจกต์สำคัญ",
+      contact: "ช่องทางติดต่อ"
     }
   }
 };
 
 export const skills = [
   {
-    name: "Python",
-    category: { en: "Data & Backend", th: "ข้อมูล & ระบบหลังบ้าน" },
-    useCase: { en: "Data analysis, machine learning models, and robust backend services", th: "วิเคราะห์ข้อมูล, สร้างโมเดล Machine Learning และพัฒนาระบบหลังบ้าน" },
+    name: "Frontend",
+    category: { en: "Web UI", th: "ส่วนติดต่อผู้ใช้" },
+    useCase: { en: "React, Next.js, HTML, CSS", th: "React, Next.js, HTML, CSS" },
     color: "from-blue-400 to-cyan-400"
   },
   {
-    name: "Power BI",
-    category: { en: "Visualization", th: "การแสดงผลข้อมูล" },
-    useCase: { en: "Interactive dashboards and executive-level business reporting", th: "สร้างแพลตฟอร์มแดชบอร์ดแบบ Interactive และรายงานสรุปสำหรับผู้บริหาร" },
-    color: "from-yellow-400 to-orange-400"
-  },
-  {
-    name: "SQL",
-    category: { en: "Database Management", th: "การจัดการฐานข้อมูล" },
-    useCase: { en: "Executing complex queries and managing relational database systems", th: "เขียน Query ที่ซับซ้อนและจัดการระบบฐานข้อมูลเชิงสัมพันธ์" },
-    color: "from-slate-400 to-blue-400"
-  },
-  {
-    name: "JavaScript",
-    category: { en: "Web Development", th: "พัฒนาเว็บแอปพลิเคชัน" },
-    useCase: { en: "Building dynamic user interfaces and full-stack web applications", th: "สร้าง User Interfaces แบบไดนามิกและเว็บแอปพลิเคชันแบบ Full-stack" },
-    color: "from-yellow-300 to-amber-400"
-  },
-  {
-    name: "R",
-    category: { en: "Statistical Analysis", th: "การวิเคราะห์สถิติ" },
-    useCase: { en: "Advanced statistical computing and rigorous data analysis", th: "การคำนวณทางสถิติขั้นสูงและการวิเคราะห์ข้อมูลเชิงลึก" },
-    color: "from-blue-500 to-indigo-500"
-  },
-  {
-    name: "Google Sheets",
-    category: { en: "Data Processing", th: "การประมวลผลข้อมูล" },
-    useCase: { en: "Automation, reporting, and quick data manipulation for teams", th: "ระบบอัตโนมัติ, การทำรายงาน และการจัดการข้อมูลเบื้องต้นสำหรับทีม" },
+    name: "Backend",
+    category: { en: "Server & API", th: "เซิร์ฟเวอร์ & โครงสร้าง API" },
+    useCase: { en: "Node.js, Express, REST API", th: "Node.js, Express, REST API" },
     color: "from-green-400 to-emerald-500"
   },
   {
-    name: "HTML",
-    category: { en: "Web Foundation", th: "รากฐานโครงสร้างเว็บ" },
-    useCase: { en: "Structuring accessible and SEO-friendly web content", th: "สร้างโครงสร้างเว็บที่รองรับ Accessibility และเป็นมิตรกับ SEO" },
-    color: "from-orange-400 to-red-500"
+    name: "Database",
+    category: { en: "Data Management", th: "การจัดการฐานข้อมูล" },
+    useCase: { en: "MySQL, SQLite, Prisma ORM", th: "MySQL, SQLite, Prisma ORM" },
+    color: "from-slate-400 to-blue-400"
   },
   {
-    name: "CSS",
-    category: { en: "UI Styling", th: "การตกแต่ง UI" },
-    useCase: { en: "Crafting beautiful, responsive, and animated user interfaces", th: "ออกแบบหน้าจอให้สวยงาม รองรับทุกขนาดหน้าจอ และมีแอนิเมชัน" },
-    color: "from-blue-400 to-purple-500"
+    name: "Data & Analytics",
+    category: { en: "Analysis & Visuals", th: "การวิเคราะห์และแสดงผลข้อมูล" },
+    useCase: { en: "Python, Pandas, Power BI", th: "Python, Pandas, Power BI" },
+    color: "from-yellow-400 to-orange-400"
+  },
+  {
+    name: "Tools & DevOps",
+    category: { en: "Infrastructure", th: "เครื่องมือและโครงสร้าง" },
+    useCase: { en: "Git, Linux, SSL configuration, Reverse proxy", th: "Git, Linux, ตั้งค่า SSL, Reverse proxy" },
+    color: "from-purple-400 to-pink-500"
   }
 ];
 
 export const socialLinks = {
   github: "https://github.com/6ixthxense",
+  portfolio: "https://resume-mmicky-y.web.app",
   linkedin: "https://www.linkedin.com/in/woravut-dairoop-13972b1b9/",
-  instagram: "https://www.instagram.com/somxonx_ckyy/",
-  facebook: "https://www.facebook.com/MickeyWRV/"
+  email: "woravutdairoop.work@gmail.com"
 };
